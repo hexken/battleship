@@ -1,0 +1,15 @@
+  state 0 OK -> Start a new game
+->debug_test(easy)
+  state 1 OK -> Fire Away!
+     1  2  3  4
+  A  _  _  _  _
+  B  _  _  _  v
+  C  _  _  h  v
+  D  _  _  _  _
+  Current Game (debug): 1
+  Shots: 0/8
+  Bombs: 0/2
+  Score: 0/3 (Total: 0/3)
+  Ships: 0/2
+    2x1: [B, 4]->v;[C, 4]->v
+    1x1: [C, 3]->h

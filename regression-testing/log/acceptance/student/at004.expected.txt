@@ -1,0 +1,18 @@
+  state 0 OK -> Start a new game
+->new_game(medium)
+  state 1 OK -> Fire Away!
+     1  2  3  4  5  6
+  A  _  _  _  _  _  _
+  B  _  _  _  _  _  _
+  C  _  _  _  _  _  _
+  D  _  _  _  _  _  _
+  E  _  _  _  _  _  _
+  F  _  _  _  _  _  _
+  Current Game: 1
+  Shots: 0/16
+  Bombs: 0/3
+  Score: 0/6 (Total: 0/6)
+  Ships: 0/3
+    3x1: Not Sunk
+    2x1: Not Sunk
+    1x1: Not Sunk
