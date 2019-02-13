@@ -1,0 +1,3 @@
+new_game(easy)
+fire([A,1])
+fire([A,1])

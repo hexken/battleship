@@ -21,16 +21,16 @@ feature {NONE} -- Initialization
 	make
 		-- Initialization for `Current'.
 	local
-		m_access : ETF_MODEL_ACCESS
+		m_access : GAME_ACCESS
 	do
 		Precursor
 		-- may also override the string 'initial_state'
-		model := m_access.m
+		model := m_access.game
 	end
 
 feature -- Queries
 
-	model : ETF_MODEL
+	model : GAME
 
 	model_state : STRING
 			-- Return a string representation of current model state

@@ -11,7 +11,7 @@ create
 	make
 
 feature -- Queries
-	model: ETF_MODEL
+	model: GAME
 
 	error: BOOLEAN
 
@@ -32,9 +32,9 @@ feature -- Constructor
 	make
 			-- Initialize.
 		local
-			model_access: ETF_MODEL_ACCESS
+			model_access: GAME_ACCESS
 		do
-			model := model_access.m
+			model := model_access.game
 			create sys.make
 			create ui.make
 	      	create input.make_without_running("dummy", ui)

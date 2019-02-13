@@ -5,7 +5,7 @@ note
 	revision: "$Revision$"
 
 class
-	ETF_MODEL
+	GAME
 
 inherit
 	ANY
@@ -13,22 +13,30 @@ inherit
 			out
 		end
 
-create {ETF_MODEL_ACCESS}
+create {GAME_ACCESS}
 	make
 
 feature {NONE} -- Initialization
 	make
 			-- Initialization for `Current'.
+		local
+				data_access: GAME_DATA_ACCESS
 		do
-			create s.make_empty
-			i := 0
+			data := data_access.data
 		end
 
 feature -- model attributes
-	s : STRING
+	data: GAME_DATA
+--	ships: SET [SHIP]
 	i : INTEGER
 
 feature -- model operations
+	init_game (mode: INTEGER)
+		do
+			i := 0
+			data.mode := mode
+		end
+
 	default_update
 			-- Perform update to the model state.
 		do
