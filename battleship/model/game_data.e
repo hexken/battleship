@@ -10,49 +10,47 @@ class
 create{GAME_DATA_ACCESS}
 	make
 
-feature -- attributes
+feature{NONE} -- constants
 
-	mode: INTEGER assign set_mode -- 13 easy, 14 med, 15 hard, 16 advanced
 	max_rows: INTEGER
+		once
+			Result := 12
+		end
 	max_cols: INTEGER
+		once
+			Result := 12
+		end
+
+feature -- attributes (data)
+
+	level: INTEGER  -- 13 easy, 14 med, 15 hard, 16 advanced
+	debug_mode: BOOLEAN -- are we in debug mode?
+	game_over: BOOLEAN -- is the current game still on?
+
+	player: PLAYER
+	map: MAP
+	ships: ARRAY [SHIP]
+
 
 feature{GAME_DATA_ACCESS} -- constructor
 
-	make
-		do
-
-		end
-
-feature -- initilization
-
-	set_mode (inmode: INTEGER)
+	make (inlevel: INTEGER; indebug_mode: BOOLEAN)
 			-- set the game mode, rebase the ETF enums
 		require
-			13 <= inmode and inmode <= 16
-		once
-			mode := inmode - 13
+			game_over: game_over
+			level_value: 13 <= inlevel and inlevel <= 16
+		do
+			level := inlevel - 13
+			game_over := False
+			debug_mode := indebug_mode
 		ensure
-			0 <= mode and mode <= 3 and
-			mode =  old inmode - 13
+			level_set:
+				0 <= level and level <= 3 and
+				level =  old inlevel - 13
+
+			game_over_set: game_over = False
 		end
 
-	set_max_rows (rows: INTEGER)
-			-- set the max rows
-		require
-			1 <= rows and rows <= 12
-		once
-			max_rows := rows
-		ensure
-			max_rows = old rows
-		end
+feature{NONE} -- private game init helpers
 
-	set_max_cols (cols: INTEGER)
-			-- set the max cols
-		require
-			1 <= cols and cols <= 12
-		once
-			max_cols := cols
-		ensure
-			max_cols = old cols
-		end
 end

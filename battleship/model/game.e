@@ -16,37 +16,30 @@ inherit
 create {GAME_ACCESS}
 	make
 
-feature {NONE} -- Initialization
-	make
-			-- Initialization for `Current'.
-		local
-				data_access: GAME_DATA_ACCESS
-		do
-			data := data_access.data
-		end
-
 feature -- model attributes
+
 	data: GAME_DATA
---	ships: SET [SHIP]
-	i : INTEGER
+	state : INTEGER
 
 feature -- model operations
-	init_game (mode: INTEGER)
+
+	make (inlevel: INTEGER; indebug_mode: BOOLEAN)
+		local
+			data_access: GAME_DATA_ACCESS
 		do
-			i := 0
-			data.mode := mode
+			create data_access.make (inlevel, indebug_mode)
+			state := 0
+
 		end
 
 	default_update
-			-- Perform update to the model state.
 		do
-			i := i + 1
+			state := state + 1
 		end
 
 	reset
-			-- Reset model state.
 		do
-			make
+
 		end
 
 feature -- queries
@@ -55,7 +48,7 @@ feature -- queries
 			create Result.make_from_string ("  ")
 			Result.append ("System State: default model state ")
 			Result.append ("(")
-			Result.append (i.out)
+			Result.append (state.out)
 			Result.append (")")
 		end
 

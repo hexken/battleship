@@ -13,8 +13,8 @@ inherit
 			out
 		end
 
-create {MAP_ACCESS}
-	make
+create {GAME_DATA}
+	empty_board
 
 feature -- attributes
 
@@ -27,20 +27,9 @@ feature -- attributes
 			Result := <<'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L'>>
 		end
 
-feature{MAP_ACCESS} -- constructor
+feature{GAME_DATA} -- constructor
 
-	make
-			-- defaults to easy mode, if I can use arguments with singleton this would
-			-- be unneccsary.
-		do
-			rows := 4
-			cols := 4
-			create board.make_filled (create {SHIP_ALPHABET}.make ('_'), rows, cols)
-		end
-
-feature{GAME} -- initialization
-
-	init_board (inrows: INTEGER; incols: INTEGER)
+	empty_board (inrows: INTEGER; incols: INTEGER)
 			-- set initial board
 		do
 			rows := inrows
@@ -48,11 +37,9 @@ feature{GAME} -- initialization
 			create board.make_filled (create {SHIP_ALPHABET}.make ('_'), rows, cols)
 		end
 
---	place_ships ()
+feature{NONE} -- utilities
 
-feature{GAME} -- utilities
-
-feature{GAME} -- queries
+feature{GAME_DATA} -- queries
 
 	out: STRING
 			-- Return string representation of current game.

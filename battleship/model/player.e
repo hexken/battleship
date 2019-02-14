@@ -7,26 +7,23 @@ note
 class
 	PLAYER
 
-create{GAME}
+create{GAME_DATA}
 	make
 
 feature -- attributes
 
-	game_data: GAME_DATA
 	ships_sunk: INTEGER
 	ammo: INTEGER
 	bombs: INTEGER
 	score: INTEGER
 
-feature{GAME} -- contructor
+feature{GAME_DATA} -- contructor
 
 	make (am: INTEGER; bo: INTEGER)
 		require
 			am >= 0 and bo >= 0
-		local
-			game_data_access: GAME_DATA_ACCESS
 		do
-			game_data := game_data_access.data
+
 			ammo := am
 			bombs := bo
 		ensure
@@ -35,10 +32,18 @@ feature{GAME} -- contructor
 
 feature -- commands
 
-	fire (coordinates: TUPLE [row: INTEGER; col: INTEGER])
+	fire: BOOLEAN
 		do
-
+			ammo := ammo - 1
 		end
+
+	bomb: BOOLEAN
+		do
+			bombs := bombs - 1
+		end
+
+--	update_ships_sunk:
+
 
 --	bomb(coor1: TUPLE
 

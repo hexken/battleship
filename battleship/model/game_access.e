@@ -4,13 +4,20 @@ note
 	date: "$Date$"
 	revision: "$Revision$"
 
-expanded class
+class
 	GAME_ACCESS
 
-feature
+create
+	make
+
+feature -- access
 	game: GAME
+
+feature{ETF_NEW_GAME, ETF_DEBUG_TEST} -- initialize the game
+
+	make (inlevel: INTEGER; indebug_mode: BOOLEAN)
 		once
-			create Result.make
+			create game.make (inlevel, indebug_mode)
 		end
 
 invariant

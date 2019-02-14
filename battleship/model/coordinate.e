@@ -15,24 +15,14 @@ feature -- attributes
 	row: INTEGER
 	col: INTEGER
 
-	-- define the max row/col for coordinates
-	max_row: INTEGER
-		once
-			Result := 12
-		end
-	max_col: INTEGER
-		once
-			Result := 12
-		end
-
 feature -- constructors
 
-	make (in: TUPLE [row: INTEGER; col: INTEGER])
+	make (inrow: INTEGER; incol: INTEGER)
 		do
-			row := in.row
-			col := in.col
+			row := inrow
+			col := incol
 		ensure
-			row = in.row and col = in.col
+			row = inrow and col = incol
 		end
 
 end
