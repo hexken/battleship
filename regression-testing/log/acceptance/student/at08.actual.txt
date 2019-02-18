@@ -1,3 +1,18 @@
   state 0 OK -> Start a new game
 ->debug_test(medium)
-  state 2 OK -> Start a new game
+  state 1 OK -> Fire Away!
+     1  2  3  4  5  6
+  A  _  _  _  _  _  _
+  B  _  _  _  _  _  _
+  C  _  h  h  _  _  _
+  D  _  v  _  _  _  _
+  E  _  v  _  _  _  _
+  F  _  v  _  v  _  _
+  Current Game (debug): 1
+  Shots: 0/16
+  Bombs: 0/3
+  Score: 0/6 (Total: 0/6)
+  Ships: 0/3
+    3x1: [D, 2]->v;[E, 2]->v;[F, 2]->v
+    2x1: [C, 2]->h;[C, 3]->h
+    1x1: [F, 4]->v

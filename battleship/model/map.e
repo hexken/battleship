@@ -43,6 +43,13 @@ feature{GAME_DATA} -- constructor
 			rows := inrows
 			cols := incols
 			create board.make_filled (create {MAP_TILE}.make_default, rows, cols)
+			across 1 |..| rows as r
+			loop
+				across 1 |..| cols as c
+				loop
+					board [r.item, c.item] := create {MAP_TILE}.make_default
+				end
+			end
 		ensure
 			rows = inrows and cols = incols
 		end

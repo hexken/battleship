@@ -223,21 +223,18 @@ feature{NONE} -- private data init helpers
 				if d = 1 then
 					c := (gen.column \\ board_size) + 1
 					r := (gen.row \\ (board_size - size)) + 1
+					create new_ship.make (size, r + 1, c, d)
 				else
 					r := (gen.row \\ board_size) + 1
 					c := (gen.column \\ (board_size - size)) + 1
+					create new_ship.make (size, r, c + 1, d)
 				end
-
-				create new_ship.make (size, r, c, d)
 
 				if not collide_with (new_ship) then
 					-- If the generated ship does not collide with
 					-- ones that have been generated, then
 					-- add it to the set.
-					check attached ships as s
-					then
-						s.extend (new_ship)
-					end
+					ships.extend (new_ship)
 					size := size - 1
 				end
 				gen.forth
@@ -255,11 +252,9 @@ feature{NONE} -- private data init helpers
 				ship1_tail_row := ship1.row
 				ship1_tail_col := ship1.col
 				if ship1.dir = 1 then
-					ship1_tail_row := ship1_tail_row + 1
 					ship1_head_row := ship1_tail_row + ship1.size - 1
 					ship1_head_col := ship1_tail_col
 				else
-					ship1_tail_col := ship1_tail_col + 1
 					ship1_head_col := ship1_tail_col + ship1.size - 1
 					ship1_head_row := ship1_tail_row
 				end
@@ -267,11 +262,9 @@ feature{NONE} -- private data init helpers
 				ship2_tail_row := ship2.row
 				ship2_tail_col := ship2.col
 				if ship2.dir = 1 then
-					ship2_tail_row := ship2_tail_row + 1
 					ship2_head_row := ship2_tail_row + ship2.size - 1
 					ship2_head_col := ship2_tail_col
 				else
-					ship2_tail_col := ship2_tail_col + 1
 					ship2_head_col := ship2_tail_col + ship2.size - 1
 					ship2_head_row := ship2_tail_row
 				end
@@ -301,9 +294,7 @@ feature{NONE} -- private data init helpers
 
 	place_new_ships
 			-- Place the randomly generated positions of `new_ships' onto the `board'.
-			-- Notice that when a ship's row and column are given,
-			-- its coordinate starts with (row + 1, col) for a vertical ship,
-			-- and starts with (row, col + 1) for a horizontal ship.
+			-- beginning at ship.row, ship.col
 		require
 				across ships.lower |..| ships.upper as i all
 					across ships.lower |..| ships.upper as j all
@@ -313,21 +304,21 @@ feature{NONE} -- private data init helpers
 		do
 
 			across
-				ships as new_ship
+				ships as s
 			loop
-				if new_ship.item.dir = 1 then
+				if s.item.dir = 1 then
 					-- Vertical ship
 					across
-						1 |..| new_ship.item.size as i
+						0 |..| (s.item.size - 1) as i
 					loop
-						map.board[new_ship.item.row + i.item, new_ship.item.col].make_occupied (new_ship.item, debug_mode)
+						map.board[s.item.row + i.item, s.item.col].make_occupied (s.item, debug_mode)
 					end
 				else
 					-- Horizontal ship
 					across
-						1 |..| new_ship.item.size as i
+						0 |..| (s.item.size - 1) as i
 					loop
-						map.board[new_ship.item.row, new_ship.item.col + i.item].make_occupied (new_ship.item, debug_mode)
+						map.board[s.item.row, s.item.col + i.item].make_occupied (s.item, debug_mode)
 					end
 				end
 			end

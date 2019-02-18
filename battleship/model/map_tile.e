@@ -7,6 +7,12 @@ note
 class
 	MAP_TILE
 
+inherit
+	ANY
+		redefine
+			out
+		end
+
 create
 	make_default, make_occupied
 
@@ -71,6 +77,14 @@ feature -- commands
 			fired_upon := x
 		ensure
 			fired_upon = x
+		end
+
+feature -- output
+
+	out: STRING
+			-- Return string representation of alphabet.
+		do
+			Result := symbol.out
 		end
 
 invariant
