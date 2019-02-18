@@ -7,8 +7,8 @@ note
 class
 	SHIP
 
-create
---	make
+create{GAME_DATA}
+	make
 
 feature -- attributes
 
@@ -18,7 +18,7 @@ feature -- attributes
 	col: INTEGER
 	dir: INTEGER -- 1 vert, 0 horiz
 
-feature -- constructors
+feature{GAME_DATA} -- constructors
 
 	make (insize: INTEGER; inrow: INTEGER; incol: INTEGER; indir: INTEGER)
 		require

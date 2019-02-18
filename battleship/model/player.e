@@ -42,20 +42,27 @@ feature -- commands
 			bombs := bombs - 1
 		end
 
---	update_ships_sunk:
+	increment_ships_sunk
+		do
+			ships_sunk := ships_sunk + 1
+		ensure
+			ships_sunk = old ships_sunk + 1
+		end
 
-
---	bomb(coor1: TUPLE
 
 feature -- queries
 
-	no_ammo: BOOLEAN
+	out_of_ammo: BOOLEAN
 		do
 			Result := ammo = 0
 		end
 
-	no_bombs: BOOLEAN
+	out_of_bombs: BOOLEAN
 		do
 			Result := bombs = 0
 		end
+
+invariant
+	bombs >= 0 and ammo >= 0 and ships_sunk >= 0
+
 end
