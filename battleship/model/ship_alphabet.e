@@ -14,13 +14,33 @@ inherit
 		end
 
 create
-	make
+	make_hit, make_miss, make_blank, make_horizontal, make_vertical
 
-feature -- Commands
+feature -- constants
 
-	make (a_char: CHARACTER)
+	make_hit
 		do
-			item := a_char
+			item := 'X'
+		end
+
+	make_miss
+		do
+			item := 'O'
+		end
+
+	make_blank
+		do
+			item := '_'
+		end
+
+	make_horizontal
+		do
+			item := 'h'
+		end
+
+	make_vertical
+		do
+			item := 'v'
 		end
 
 feature -- Attributes
@@ -38,5 +58,6 @@ feature -- output
 
 invariant
 	allowable_symbols:
-		item = '_' or item = 'h' or item = 'v' or item = 'O' or item = 'X'
+		item ~ 'X' or item ~ 'O' or
+		item ~ 'v' or item ~ 'h' or item ~ '_'
 end

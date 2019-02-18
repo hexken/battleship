@@ -88,17 +88,17 @@ feature{GAME} -- Game messages
 		require
 			sz > 0
 		do
-			Result := sz.out + "x1 sunk!"
+			Result := sz.out + "x1 ship sunk!"
 		end
 
 	s9 (sz1, sz2: INTEGER): STRING
 		require
 			sz1 > 0 and sz2 > 0
 		do
-			Result := sz1.out + "x1 sunk and " + sz2.out + "x1 sunk!"
+			Result := sz1.out + "x1 and " + sz2.out + "x1 ships sunk!"
 		end
 
-	ok_string: STRING
+	ok_str: STRING
 		once
 			Result := "OK"
 		end
@@ -107,7 +107,6 @@ feature -- attributes (data)
 
 	level: INTEGER  -- 0 easy, 1 med, 2 hard, 3 advanced
 	debug_mode: BOOLEAN -- are we in debug mode?
-	game_over: BOOLEAN -- is the current game still on?
 	board_size: INTEGER
 	num_ships: INTEGER
 	max_score: INTEGER
@@ -137,7 +136,6 @@ feature{GAME_DATA_ACCESS} -- constructor
 
 	make
 		do
-			game_over := True
 			create ships.make (2)
 			create player.make
 			create map.make
@@ -148,11 +146,9 @@ feature{GAME} -- init the data
 	init (inlevel: INTEGER; indebug_mode: BOOLEAN)
 			-- set the game mode, rebase the ETF enums
 		require
-			game_over: game_over = True
 			valid_level: 13 <= inlevel and inlevel <= 16
 		do
 			level := inlevel - 13
-			game_over := False
 			debug_mode := indebug_mode
 
 			inspect level
@@ -182,8 +178,7 @@ feature{GAME} -- init the data
 				max_bombs := 7
 			end
 
-			player.ammo := max_ammo
-			player.bombs := max_bombs
+			player.reset (max_ammo, max_bombs)
 			map.set_empty_board (board_size, board_size)
 			generate_ships
 			place_new_ships
@@ -191,8 +186,6 @@ feature{GAME} -- init the data
 			level_set:
 				0 <= level and level <= 3 and
 				level =  old inlevel - 13
-
-			game_over_set: game_over = False
 		end
 
 feature{NONE} -- private data init helpers

@@ -34,11 +34,27 @@ feature -- commands
 			bombs := bombs - 1
 		end
 
+	increment_score (x: INTEGER)
+		do
+			score := score + x
+		ensure
+			score_positive: score >= 0
+			score_inc: score = old score + x
+		end
+
 	increment_ships_sunk
 		do
 			ships_sunk := ships_sunk + 1
 		ensure
 			ships_sunk = old ships_sunk + 1
+		end
+
+	reset (inammo, inbombs: INTEGER)
+		do
+			ammo := inammo
+			bombs := inbombs
+			ships_sunk := 0
+			score := 0
 		end
 
 	set_ammo (inammo: INTEGER)

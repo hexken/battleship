@@ -20,15 +20,13 @@ feature -- attribute
 
 	symbol: SHIP_ALPHABET assign set_symbol
 	ship: detachable SHIP assign set_ship
-	occupied: BOOLEAN assign set_occupied
-	fired_upon: BOOLEAN assign set_fired_upon
+	fired_upon: BOOLEAN
 
 feature -- constructor
 
 	make_default
 		do
-			create symbol.make('_')
-			occupied := False
+			create symbol.make_blank
 			fired_upon := False
 		end
 
@@ -36,20 +34,29 @@ feature -- constructor
 		do
 			if debug_mode then
 				if inship.dir = 1 then
-					create symbol.make('v')
+					create symbol.make_vertical
 				else
-					create symbol.make('h')
+					create symbol.make_horizontal
 				end
 			else
-				create symbol.make('_')
+				create symbol.make_blank
 			end
 
-			occupied := True
 			fired_upon := False
 			ship := inship
 		end
 
 feature -- commands
+
+	set_fired_upon
+		do
+			fired_upon := True
+			if ship /= Void then
+				symbol := create {SHIP_ALPHABET}.make_hit
+			else
+				symbol := create {SHIP_ALPHABET}.make_miss
+			end
+		end
 
 	set_symbol (insymbol: SHIP_ALPHABET)
 		do
@@ -65,20 +72,6 @@ feature -- commands
 			ship ~ inship
 		end
 
-	set_occupied (x: BOOLEAN)
-		do
-			occupied := x
-		ensure
-			occupied = x
-		end
-
-	set_fired_upon (x: BOOLEAN)
-		do
-			fired_upon := x
-		ensure
-			fired_upon = x
-		end
-
 feature -- output
 
 	out: STRING
@@ -88,6 +81,7 @@ feature -- output
 		end
 
 invariant
-	hit: (occupied and fired_upon) =  (symbol.item ~ 'X')
-	miss:( not occupied and fired_upon) = (symbol.item ~ 'O')
+	hit: (ship /= Void and then fired_upon) =  (symbol.item ~ 'X')
+	miss:(ship = Void and then fired_upon) = (symbol.item ~ 'O')
+	not_fired_upon: (not fired_upon) = (symbol.item ~ '_' or else symbol.item ~ 'h' or else symbol.item ~ 'v')
 end
