@@ -43,7 +43,7 @@ feature -- attributes (data)
 
 	player: PLAYER
 	map: MAP
-	ships: ARRAYED_LST [SHIP]
+	ships: ARRAYED_LIST [SHIP]
 
 
 feature{GAME_DATA_ACCESS} -- constructor
@@ -68,7 +68,7 @@ feature{GAME_DATA_ACCESS} -- constructor
 feature{NONE} -- private game init helpers
 
 
-	generate_ships (is_debug_mode: BOOLEAN; board_size: INTEGER; num_ships: INTEGER): ARRAYED_LIST[TUPLE[size: INTEGER; row: INTEGER; col: INTEGER; dir: BOOLEAN]]
+	generate_ships (is_debug_mode: BOOLEAN; board_size: INTEGER; num_ships: INTEGER): ARRAYED_LIST[SHIP]
 			-- places the ships on the board
 			-- either deterministicly random or completely random depending on debug mode
 		local
@@ -76,7 +76,7 @@ feature{NONE} -- private game init helpers
 			c,r : INTEGER
 			d: BOOLEAN
 			gen: RANDOM_GENERATOR
-			new_ship: TUPLE[size: INTEGER; row: INTEGER; col: INTEGER; dir: BOOLEAN]
+			new_ship: SHIP
 		do
 			create Result.make (num_ships)
 			if is_debug_mode then
@@ -89,8 +89,8 @@ feature{NONE} -- private game init helpers
 			until
 				size = 0
 			loop
-				d := (gen.direction \\ 2 = 1)
-				if d then
+				d := gen.direction \\ 2
+				if d = 1 then
 					c := (gen.column \\ board_size) + 1
 					r := (gen.row \\ (board_size - size)) + 1
 				else
@@ -98,7 +98,7 @@ feature{NONE} -- private game init helpers
 					c := (gen.column \\ (board_size - size)) + 1
 				end
 
-				new_ship := [size, r, c, d]
+				new_ship.make (size, r, c, d)
 
 				if not collide_with (Result, new_ship) then
 					-- If the generated ship does not collide with
