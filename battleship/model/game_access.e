@@ -8,6 +8,7 @@ expanded class
 	GAME_ACCESS
 
 feature -- access
+
 	game: GAME
 		once
 			create Result.make

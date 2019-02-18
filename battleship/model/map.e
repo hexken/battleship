@@ -31,10 +31,14 @@ feature{GAME_DATA} -- constructor
 
 	empty_board (inrows: INTEGER; incols: INTEGER)
 			-- set initial board
+		require
+			inrows > 0 and incols > 0
 		do
 			rows := inrows
 			cols := incols
-			create board.make_filled (create {MAP_TILE}.make, rows, cols)
+			create board.make_filled (create {MAP_TILE}.make_default, rows, cols)
+		ensure
+			rows = inrows and cols = incols
 		end
 
 feature{NONE} -- utilities
@@ -53,7 +57,7 @@ feature{GAME_DATA} -- queries
 			across 1 |..| board.width as i loop
 				Result.append("%N  "+ row_indices[i.item].out)
 				across 1 |..| board.height as j loop
-					Result.append ("  " + board[i.item,j.item].out)
+					Result.append ("  " + board[i.item, j.item].symbol.out)
 				end
 			end
 		end

@@ -100,9 +100,12 @@ feature{NONE} -- Game messages
 
 feature -- attributes (data)
 
-	level: INTEGER  -- 13 easy, 14 med, 15 hard, 16 advanced
+	level: INTEGER  -- 0 easy, 1 med, 2 hard, 3 advanced
 	debug_mode: BOOLEAN -- are we in debug mode?
 	game_over: BOOLEAN -- is the current game still on?
+	board_size: INTEGER
+	num_ships: INTEGER
+	max_score: INTEGER
 
 	rand_gen: RANDOM_GENERATOR
 			-- random generator for normal mode
@@ -120,14 +123,18 @@ feature -- attributes (data)
 
 	player: detachable PLAYER
 	map: detachable MAP
-	ships: detachable ARRAYED_LIST [SHIP]
+	ships:  ARRAYED_LIST [SHIP]
 
 
 feature{GAME_DATA_ACCESS} -- constructor
 
-	make do end
+	make
+		do
+			create ships.make (2)
+		end
 
 feature{GAME} -- init the data
+
 	init (inlevel: INTEGER; indebug_mode: BOOLEAN)
 			-- set the game mode, rebase the ETF enums
 		require
@@ -137,6 +144,29 @@ feature{GAME} -- init the data
 			level := inlevel - 13
 			game_over := False
 			debug_mode := indebug_mode
+
+			inspect level
+			when 0 then
+				board_size := 4
+				max_score := 3
+				create player.make (8, 2)
+			when 1 then
+				board_size := 6
+				max_score := 6
+				create player.make (16, 3)
+			when 2 then
+				board_size := 8
+				max_score := 15
+				create player.make (24, 5)
+			when 3 then
+				board_size := 12
+				max_score := 28
+				create player.make (40, 7)
+			end
+
+			create map.empty_board (board_size, board_size)
+			generate_ships
+			place_new_ships
 		ensure
 			level_set:
 				0 <= level and level <= 3 and
@@ -148,7 +178,7 @@ feature{GAME} -- init the data
 feature{NONE} -- private game init helpers
 
 
-	generate_ships (is_debug_mode: BOOLEAN; board_size: INTEGER; num_ships: INTEGER): ARRAYED_LIST[SHIP]
+	generate_ships
 			-- places the ships on the board
 			-- either deterministicly random or completely random depending on debug mode
 		local
@@ -158,8 +188,8 @@ feature{NONE} -- private game init helpers
 			gen: RANDOM_GENERATOR
 			new_ship: SHIP
 		do
-			create Result.make (num_ships)
-			if is_debug_mode then
+			create ships.make (num_ships)
+			if debug_mode then
 				gen := debug_gen
 			else
 				gen := rand_gen
@@ -180,11 +210,14 @@ feature{NONE} -- private game init helpers
 
 				create new_ship.make (size, r, c, d)
 
-				if not collide_with (Result, new_ship) then
+				if not collide_with (new_ship) then
 					-- If the generated ship does not collide with
 					-- ones that have been generated, then
 					-- add it to the set.
-					Result.extend (new_ship)
+					check attached ships as s
+					then
+						s.extend (new_ship)
+					end
 					size := size - 1
 				end
 				gen.forth
@@ -195,55 +228,94 @@ feature{NONE} -- private game init helpers
 
 	collide_with_each_other (ship1, ship2: SHIP): BOOLEAN
 				-- Does `ship1' collide with `ship2'?
-			local
-				ship1_head_row, ship1_head_col, ship1_tail_row, ship1_tail_col: INTEGER
-				ship2_head_row, ship2_head_col, ship2_tail_row, ship2_tail_col: INTEGER
-			do
-					ship1_tail_row := ship1.row
-					ship1_tail_col := ship1.col
-					if ship1.dir = 1 then
-						ship1_tail_row := ship1_tail_row + 1
-						ship1_head_row := ship1_tail_row + ship1.size - 1
-						ship1_head_col := ship1_tail_col
-					else
-						ship1_tail_col := ship1_tail_col + 1
-						ship1_head_col := ship1_tail_col + ship1.size - 1
-						ship1_head_row := ship1_tail_row
-					end
+		local
+			ship1_head_row, ship1_head_col, ship1_tail_row, ship1_tail_col: INTEGER
+			ship2_head_row, ship2_head_col, ship2_tail_row, ship2_tail_col: INTEGER
+		do
+				ship1_tail_row := ship1.row
+				ship1_tail_col := ship1.col
+				if ship1.dir = 1 then
+					ship1_tail_row := ship1_tail_row + 1
+					ship1_head_row := ship1_tail_row + ship1.size - 1
+					ship1_head_col := ship1_tail_col
+				else
+					ship1_tail_col := ship1_tail_col + 1
+					ship1_head_col := ship1_tail_col + ship1.size - 1
+					ship1_head_row := ship1_tail_row
+				end
 
-					ship2_tail_row := ship2.row
-					ship2_tail_col := ship2.col
-					if ship2.dir = 1 then
-						ship2_tail_row := ship2_tail_row + 1
-						ship2_head_row := ship2_tail_row + ship2.size - 1
-						ship2_head_col := ship2_tail_col
-					else
-						ship2_tail_col := ship2_tail_col + 1
-						ship2_head_col := ship2_tail_col + ship2.size - 1
-						ship2_head_row := ship2_tail_row
-					end
+				ship2_tail_row := ship2.row
+				ship2_tail_col := ship2.col
+				if ship2.dir = 1 then
+					ship2_tail_row := ship2_tail_row + 1
+					ship2_head_row := ship2_tail_row + ship2.size - 1
+					ship2_head_col := ship2_tail_col
+				else
+					ship2_tail_col := ship2_tail_col + 1
+					ship2_head_col := ship2_tail_col + ship2.size - 1
+					ship2_head_row := ship2_tail_row
+				end
 
-					Result :=
-						ship1_tail_col <= ship2_head_col and then
+				Result :=
+					ship1_tail_col <= ship2_head_col and then
  						ship1_head_col >= ship2_tail_col and then
  						ship1_tail_row <= ship2_head_row and then
  						ship1_head_row >= ship2_tail_row
-			end
+		end
 
-	collide_with (existing_ships: ARRAYED_LIST [SHIP]; new_ship: SHIP): BOOLEAN
+	collide_with (new_ship: SHIP): BOOLEAN
 				-- Does `new_ship' collide with the set of `existing_ships'?
-			do
-					across
-						existing_ships as existing_ship
-					loop
-						Result := Result or collide_with_each_other (new_ship, existing_ship.item)
-					end
-			ensure
-				Result =
-					across (old existing_ships.deep_twin) as existing_ship
+		do
+			check attached ships as s
+			then
+				across
+					ships as existing_ship
+				loop
+					Result := Result or collide_with_each_other (new_ship, existing_ship.item)
+				end
+			end
+		ensure
+			Result =
+					across (old ships.deep_twin) as existing_ship
 					some
 						collide_with_each_other (new_ship, existing_ship.item)
 					end
+		end
+
+	place_new_ships
+			-- Place the randomly generated positions of `new_ships' onto the `board'.
+			-- Notice that when a ship's row and column are given,
+			-- its coordinate starts with (row + 1, col) for a vertical ship,
+			-- and starts with (row, col + 1) for a horizontal ship.
+		require
+				across ships.lower |..| ships.upper as i all
+					across ships.lower |..| ships.upper as j all
+						i.item /= j.item implies not collide_with_each_other (ships[i.item], ships[j.item])
+					end
+				end
+		do
+			check attached map as m
+			then
+				across
+					ships as new_ship
+				loop
+					if new_ship.item.dir = 1 then
+						-- Vertical ship
+						across
+							1 |..| new_ship.item.size as i
+						loop
+							m.board[new_ship.item.row + i.item, new_ship.item.col].make_occupied (new_ship.item, debug_mode)
+						end
+					else
+						-- Horizontal ship
+						across
+							1 |..| new_ship.item.size as i
+						loop
+							m.board[new_ship.item.row, new_ship.item.col + i.item].make_occupied (new_ship.item, debug_mode)
+						end
+					end
+				end
 			end
+		end
 
 end

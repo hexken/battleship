@@ -7,8 +7,8 @@ note
 class
 	MAP_TILE
 
-create{MAP}
-	make
+create
+	make_default, make_occupied
 
 feature -- attribute
 
@@ -17,16 +17,33 @@ feature -- attribute
 	occupied: BOOLEAN assign set_occupied
 	fired_upon: BOOLEAN assign set_fired_upon
 
-feature{MAP} -- constructor
+feature -- constructor
 
-	make
+	make_default
 		do
 			create symbol.make('_')
 			occupied := False
 			fired_upon := False
 		end
 
-feature{MAP} -- commands
+	make_occupied (inship: SHIP; debug_mode: BOOLEAN)
+		do
+			if debug_mode then
+				if inship.dir = 1 then
+					create symbol.make('v')
+				else
+					create symbol.make('h')
+				end
+			else
+				create symbol.make('_')
+			end
+
+			occupied := True
+			fired_upon := False
+			ship := inship
+		end
+
+feature -- commands
 
 	set_symbol (insymbol: SHIP_ALPHABET)
 		do

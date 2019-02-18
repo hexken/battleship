@@ -45,10 +45,20 @@ feature -- model operations
 
 	fire (row: INTEGER; col: INTEGER)
 		do
-			state := state + 1
+
 		end
 
 	bomb (row1, row2, col1, col2: INTEGER)
+		do
+
+		end
+
+	new_game (inlevel: INTEGER; indebug_mode: BOOLEAN)
+		do
+
+		end
+
+	debug_test (inlevel: INTEGER; indebug_mode: BOOLEAN)
 		do
 
 		end

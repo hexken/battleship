@@ -8,6 +8,7 @@ expanded class
 	GAME_DATA_ACCESS
 
 feature{GAME} -- access
+
 	data: GAME_DATA
 		once
 			create Result.make
