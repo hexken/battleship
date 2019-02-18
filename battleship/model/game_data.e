@@ -34,7 +34,7 @@ feature{GAME} -- error strings
 
 	e5: STRING
 		once
-			Result := "Invalid coordinates"
+			Result := "Invalid coordinate"
 		end
 
 	e6: STRING

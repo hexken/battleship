@@ -128,18 +128,25 @@ feature -- model oprations
 
 				-- both coordinates hit
 				if ship1 /= Void and ship2 /= Void then
-					if ship1.health = 0 and ship2.health = 0 then
+					if ship1.health = 0 and ship2.health = 0 and then ship1 /= ship2 then
 						-- both sunk
 						d.player.increment_ships_sunk
 						d.player.increment_ships_sunk
+						d.player.increment_score (ship1.size + ship2.size)
+						total_score := total_score + (ship1.size + ship2.size)
 						status_str.make_from_string(d.s9 (ship1.size, ship2.size))
-					elseif ship1.health = 0 and ship2.health /= 0 then
+
+					elseif ship1.health = 0 and (ship2.health /= 0 or ship1 = ship2) then
 						 -- 1st coordinates sunk a ship, 2nd did not
 						d.player.increment_ships_sunk
+						d.player.increment_score (ship1.size)
+						total_score := total_score + ship1.size
 						status_str.make_from_string(d.s8 (ship1.size))
-					elseif ship1.health /= 0 and ship2.health = 0 then
+					elseif (ship1.health /= 0 or ship1 = ship2) and ship2.health = 0 then
 						-- 2nd coordinates sunk a ship, 1st did not
 						d.player.increment_ships_sunk
+						d.player.increment_score (ship2.size)
+						total_score := total_score + ship2.size
 						status_str.make_from_string(d.s8 (ship2.size))
 					else
 						-- no sinkages
@@ -194,7 +201,9 @@ feature{NONE} -- private helpers
 
 	check_game_over
 		do
-			if d.num_ships = d.player.ships_sunk then
+			if not game_in_progress then
+				status_str.make_from_string (d.s1)
+			elseif d.num_ships = d.player.ships_sunk then
 				game_in_progress := False
 				status_str.append (d.s6)
 			elseif d.player.out_of_ammo and d.player.out_of_bombs then
