@@ -27,7 +27,7 @@ feature -- model operations
 		local
 			data_access: GAME_DATA_ACCESS
 		do
-			create data_access.make (inlevel, indebug_mode)
+			data := data_access.init_data (inlevel, indebug_mode)
 			state := 0
 
 		end

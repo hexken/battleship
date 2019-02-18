@@ -4,20 +4,16 @@ note
 	date: "$Date$"
 	revision: "$Revision$"
 
-class
+expanded class
 	GAME_DATA_ACCESS
 
 create{GAME}
-	make
+	default_create
 
 feature{GAME} -- access
 	data: GAME_DATA
-
-feature{GAME} -- initilize the data
-
-	make (level: INTEGER; debug_mode: BOOLEAN): GAME_DATA
 		once
-			Result := data.make (level, debug_mode)
+			create Result.make
 		end
 
 invariant
