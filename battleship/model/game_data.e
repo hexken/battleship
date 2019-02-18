@@ -66,12 +66,12 @@ feature{GAME} -- Game messages
 
 	s4: STRING
 		once
-			Result := "Hit!"
+			Result := "Hit! "
 		end
 
 	s5: STRING
 		once
-			Result := "Miss!"
+			Result := "Miss! "
 		end
 
 	s6: STRING
@@ -81,21 +81,21 @@ feature{GAME} -- Game messages
 
 	s7: STRING
 		once
-			Result := "Game Over"
+			Result := "Game Over!"
 		end
 
 	s8 (sz: INTEGER): STRING
 		require
 			sz > 0
 		do
-			Result := sz.out + "x1 ship sunk!"
+			Result := sz.out + "x1 ship sunk! "
 		end
 
 	s9 (sz1, sz2: INTEGER): STRING
 		require
 			sz1 > 0 and sz2 > 0
 		do
-			Result := sz1.out + "x1 and " + sz2.out + "x1 ships sunk!"
+			Result := sz1.out + "x1 and " + sz2.out + "x1 ships sunk! "
 		end
 
 	ok_str: STRING

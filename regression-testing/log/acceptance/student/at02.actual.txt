@@ -63,7 +63,7 @@
     2x1: [C, 2]->v;[D, 2]->v
     1x1: [B, 8]->v
 ->bomb([G, 2],[G, 3])
-  state 4 Already fired there ->  Keep Firing!
+  state 4 Already fired there -> Keep Firing!
      1  2  3  4  5  6  7  8
   A  _  _  _  _  _  _  _  _
   B  _  _  _  _  _  _  _  v
@@ -84,7 +84,7 @@
     2x1: [C, 2]->v;[D, 2]->v
     1x1: [B, 8]->v
 ->bomb([G, 2],[G, 2])
-  state 5 Bomb coordinates must be adjacent ->  Keep Firing!
+  state 5 Bomb coordinates must be adjacent -> Keep Firing!
      1  2  3  4  5  6  7  8
   A  _  _  _  _  _  _  _  _
   B  _  _  _  _  _  _  _  v
@@ -105,7 +105,7 @@
     2x1: [C, 2]->v;[D, 2]->v
     1x1: [B, 8]->v
 ->bomb([G, 3],[G, 4])
-  state 6 OK ->  Keep Firing!
+  state 6 OK -> Hit! Keep Firing!
      1  2  3  4  5  6  7  8
   A  _  _  _  _  _  _  _  _
   B  _  _  _  _  _  _  _  v
@@ -126,7 +126,7 @@
     2x1: [C, 2]->v;[D, 2]->v
     1x1: [B, 8]->v
 ->fire([F, 6])
-  state 7 OK ->  Keep Firing!
+  state 7 OK -> Hit! Keep Firing!
      1  2  3  4  5  6  7  8
   A  _  _  _  _  _  _  _  _
   B  _  _  _  _  _  _  _  v
@@ -147,7 +147,7 @@
     2x1: [C, 2]->v;[D, 2]->v
     1x1: [B, 8]->v
 ->fire([H, 6])
-  state 8 OK ->  Keep Firing!
+  state 8 OK -> Hit! Keep Firing!
      1  2  3  4  5  6  7  8
   A  _  _  _  _  _  _  _  _
   B  _  _  _  _  _  _  _  v
@@ -189,7 +189,7 @@
     2x1: [C, 2]->v;[D, 2]->v
     1x1: [B, 8]->v
 ->bomb([G, 6],[G, 5])
-  state 10 Already fired there ->  Keep Firing!
+  state 10 Already fired there -> Keep Firing!
      1  2  3  4  5  6  7  8
   A  _  _  _  _  _  _  _  _
   B  _  _  _  _  _  _  _  v
@@ -210,7 +210,7 @@
     2x1: [C, 2]->v;[D, 2]->v
     1x1: [B, 8]->v
 ->debug_test(easy)
-  state 11 Game already started ->  Keep Firing!
+  state 11 Game already started -> Keep Firing!
      1  2  3  4  5  6  7  8
   A  _  _  _  _  _  _  _  _
   B  _  _  _  _  _  _  _  v
@@ -273,7 +273,7 @@
     2x1: [C, 2]->X;[D, 2]->X
     1x1: [B, 8]->X
 ->bomb([D, 8],[E, 8])
-  state 14 Game not started ->  You Win!
+  state 14 Game not started -> You Win!
      1  2  3  4  5  6  7  8
   A  _  _  _  _  _  _  _  _
   B  _  _  _  _  _  _  _  X
@@ -294,7 +294,7 @@
     2x1: [C, 2]->X;[D, 2]->X
     1x1: [B, 8]->X
 ->bomb([F, 8],[G, 8])
-  state 15 Game not started ->  You Win!
+  state 15 Game not started -> You Win!
      1  2  3  4  5  6  7  8
   A  _  _  _  _  _  _  _  _
   B  _  _  _  _  _  _  _  X
@@ -315,7 +315,7 @@
     2x1: [C, 2]->X;[D, 2]->X
     1x1: [B, 8]->X
 ->fire([F, 8])
-  state 16 Game not started ->  You Win!
+  state 16 Game not started -> You Win!
      1  2  3  4  5  6  7  8
   A  _  _  _  _  _  _  _  _
   B  _  _  _  _  _  _  _  X
@@ -336,7 +336,7 @@
     2x1: [C, 2]->X;[D, 2]->X
     1x1: [B, 8]->X
 ->fire([G, 8])
-  state 17 Game not started ->  You Win!
+  state 17 Game not started -> You Win!
      1  2  3  4  5  6  7  8
   A  _  _  _  _  _  _  _  _
   B  _  _  _  _  _  _  _  X
@@ -357,7 +357,7 @@
     2x1: [C, 2]->X;[D, 2]->X
     1x1: [B, 8]->X
 ->fire([F, 9])
-  state 18 Game not started ->  You Win!
+  state 18 Game not started -> You Win!
      1  2  3  4  5  6  7  8
   A  _  _  _  _  _  _  _  _
   B  _  _  _  _  _  _  _  X
@@ -378,7 +378,7 @@
     2x1: [C, 2]->X;[D, 2]->X
     1x1: [B, 8]->X
 ->fire([H, 8])
-  state 19 Game not started ->  You Win!
+  state 19 Game not started -> You Win!
      1  2  3  4  5  6  7  8
   A  _  _  _  _  _  _  _  _
   B  _  _  _  _  _  _  _  X
@@ -399,7 +399,7 @@
     2x1: [C, 2]->X;[D, 2]->X
     1x1: [B, 8]->X
 ->fire([A, 8])
-  state 20 Game not started ->  You Win!
+  state 20 Game not started -> You Win!
      1  2  3  4  5  6  7  8
   A  _  _  _  _  _  _  _  _
   B  _  _  _  _  _  _  _  X
@@ -420,7 +420,7 @@
     2x1: [C, 2]->X;[D, 2]->X
     1x1: [B, 8]->X
 ->debug_test(easy)
-  state 21 OK -> 
+  state 21 OK -> Fire Away!
      1  2  3  4
   A  _  _  _  _
   B  _  _  _  _
@@ -448,7 +448,7 @@
     2x1: [C, 2]->X;[C, 3]->X
     1x1: [D, 4]->v
 ->fire([D, 4])
-  state 23 Game not started ->  You Win!
+  state 23 Game not started -> You Win!
      1  2  3  4
   A  _  _  _  _
   B  _  _  _  _
@@ -462,7 +462,7 @@
     2x1: [C, 2]->X;[C, 3]->X
     1x1: [D, 4]->v
 ->fire([D, 4])
-  state 24 Game not started ->  You Win!
+  state 24 Game not started -> You Win!
      1  2  3  4
   A  _  _  _  _
   B  _  _  _  _
@@ -476,7 +476,7 @@
     2x1: [C, 2]->X;[C, 3]->X
     1x1: [D, 4]->v
 ->new_game(easy)
-  state 25 OK -> 
+  state 25 OK -> Fire Away!
      1  2  3  4
   A  _  _  _  _
   B  _  _  _  _

@@ -70,7 +70,7 @@
     2x1: [B, 4]->X;[C, 4]->X
     1x1: [C, 3]->X
 ->debug_test(medium)
-  state 6 OK -> 
+  state 6 OK -> Fire Away!
      1  2  3  4  5  6
   A  _  _  _  _  _  _
   B  _  _  _  _  _  _
@@ -87,7 +87,7 @@
     2x1: [E, 2]->v;[F, 2]->v
     1x1: [C, 4]->v
 ->bomb([A, 1],[A, 2])
-  state 7 OK ->  Keep Firing!
+  state 7 OK -> Miss! Keep Firing!
      1  2  3  4  5  6
   A  O  O  _  _  _  _
   B  _  _  _  _  _  _
@@ -104,7 +104,7 @@
     2x1: [E, 2]->v;[F, 2]->v
     1x1: [C, 4]->v
 ->bomb([A, 4],[A, 3])
-  state 8 OK ->  Keep Firing!
+  state 8 OK -> Miss! Keep Firing!
      1  2  3  4  5  6
   A  O  O  O  O  _  _
   B  _  _  _  _  _  _
@@ -121,7 +121,7 @@
     2x1: [E, 2]->v;[F, 2]->v
     1x1: [C, 4]->v
 ->bomb([A, 5],[A, 6])
-  state 9 OK ->  Keep Firing!
+  state 9 OK -> Miss! Keep Firing!
      1  2  3  4  5  6
   A  O  O  O  O  O  O
   B  _  _  _  _  _  _
@@ -138,7 +138,7 @@
     2x1: [E, 2]->v;[F, 2]->v
     1x1: [C, 4]->v
 ->fire([B, 1])
-  state 10 OK ->  Keep Firing!
+  state 10 OK -> Miss! Keep Firing!
      1  2  3  4  5  6
   A  O  O  O  O  O  O
   B  O  _  _  _  _  _
@@ -155,7 +155,7 @@
     2x1: [E, 2]->v;[F, 2]->v
     1x1: [C, 4]->v
 ->fire([B, 2])
-  state 11 OK ->  Keep Firing!
+  state 11 OK -> Miss! Keep Firing!
      1  2  3  4  5  6
   A  O  O  O  O  O  O
   B  O  O  _  _  _  _
@@ -172,7 +172,7 @@
     2x1: [E, 2]->v;[F, 2]->v
     1x1: [C, 4]->v
 ->fire([B, 3])
-  state 12 OK ->  Keep Firing!
+  state 12 OK -> Miss! Keep Firing!
      1  2  3  4  5  6
   A  O  O  O  O  O  O
   B  O  O  O  _  _  _
@@ -189,7 +189,7 @@
     2x1: [E, 2]->v;[F, 2]->v
     1x1: [C, 4]->v
 ->fire([B, 4])
-  state 13 OK ->  Keep Firing!
+  state 13 OK -> Miss! Keep Firing!
      1  2  3  4  5  6
   A  O  O  O  O  O  O
   B  O  O  O  O  _  _
@@ -206,7 +206,7 @@
     2x1: [E, 2]->v;[F, 2]->v
     1x1: [C, 4]->v
 ->fire([B, 5])
-  state 14 OK ->  Keep Firing!
+  state 14 OK -> Miss! Keep Firing!
      1  2  3  4  5  6
   A  O  O  O  O  O  O
   B  O  O  O  O  O  _
@@ -223,7 +223,7 @@
     2x1: [E, 2]->v;[F, 2]->v
     1x1: [C, 4]->v
 ->fire([B, 6])
-  state 15 OK ->  Keep Firing!
+  state 15 OK -> Miss! Keep Firing!
      1  2  3  4  5  6
   A  O  O  O  O  O  O
   B  O  O  O  O  O  O
@@ -240,7 +240,7 @@
     2x1: [E, 2]->v;[F, 2]->v
     1x1: [C, 4]->v
 ->fire([C, 1])
-  state 16 OK ->  Keep Firing!
+  state 16 OK -> Miss! Keep Firing!
      1  2  3  4  5  6
   A  O  O  O  O  O  O
   B  O  O  O  O  O  O
@@ -257,7 +257,7 @@
     2x1: [E, 2]->v;[F, 2]->v
     1x1: [C, 4]->v
 ->fire([C, 2])
-  state 17 OK ->  Keep Firing!
+  state 17 OK -> Miss! Keep Firing!
      1  2  3  4  5  6
   A  O  O  O  O  O  O
   B  O  O  O  O  O  O
@@ -274,7 +274,7 @@
     2x1: [E, 2]->v;[F, 2]->v
     1x1: [C, 4]->v
 ->fire([C, 3])
-  state 18 OK ->  Keep Firing!
+  state 18 OK -> Miss! Keep Firing!
      1  2  3  4  5  6
   A  O  O  O  O  O  O
   B  O  O  O  O  O  O
@@ -308,7 +308,7 @@
     2x1: [E, 2]->v;[F, 2]->v
     1x1: [C, 4]->X
 ->fire([C, 5])
-  state 20 OK ->  Keep Firing!
+  state 20 OK -> Miss! Keep Firing!
      1  2  3  4  5  6
   A  O  O  O  O  O  O
   B  O  O  O  O  O  O
@@ -325,7 +325,7 @@
     2x1: [E, 2]->v;[F, 2]->v
     1x1: [C, 4]->X
 ->fire([C, 6])
-  state 21 OK ->  Keep Firing!
+  state 21 OK -> Miss! Keep Firing!
      1  2  3  4  5  6
   A  O  O  O  O  O  O
   B  O  O  O  O  O  O
@@ -342,7 +342,7 @@
     2x1: [E, 2]->v;[F, 2]->v
     1x1: [C, 4]->X
 ->fire([D, 1])
-  state 22 OK ->  Keep Firing!
+  state 22 OK -> Miss! Keep Firing!
      1  2  3  4  5  6
   A  O  O  O  O  O  O
   B  O  O  O  O  O  O
@@ -359,7 +359,7 @@
     2x1: [E, 2]->v;[F, 2]->v
     1x1: [C, 4]->X
 ->fire([D, 2])
-  state 23 OK ->  Keep Firing!
+  state 23 OK -> Miss! Keep Firing!
      1  2  3  4  5  6
   A  O  O  O  O  O  O
   B  O  O  O  O  O  O
@@ -376,7 +376,7 @@
     2x1: [E, 2]->v;[F, 2]->v
     1x1: [C, 4]->X
 ->fire([D, 3])
-  state 24 OK ->  Keep Firing!
+  state 24 OK -> Miss! Keep Firing!
      1  2  3  4  5  6
   A  O  O  O  O  O  O
   B  O  O  O  O  O  O
@@ -393,7 +393,7 @@
     2x1: [E, 2]->v;[F, 2]->v
     1x1: [C, 4]->X
 ->fire([D, 4])
-  state 25 OK ->  Game Over
+  state 25 OK -> Hit! Game Over!
      1  2  3  4  5  6
   A  O  O  O  O  O  O
   B  O  O  O  O  O  O
@@ -410,7 +410,7 @@
     2x1: [E, 2]->v;[F, 2]->v
     1x1: [C, 4]->X
 ->debug_test(hard)
-  state 26 OK -> 
+  state 26 OK -> Fire Away!
      1  2  3  4  5  6  7  8
   A  _  _  h  h  h  _  _  _
   B  _  _  _  _  _  _  _  v

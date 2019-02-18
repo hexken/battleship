@@ -39,8 +39,8 @@ feature -- constructor
 		do
 			d := data_access.data
 			state := -1
-			error_str := d.ok_str
-			status_str := d.s1
+			create error_str.make_from_string (d.ok_str)
+			create status_str.make_from_string (d.s1)
 		end
 
 feature -- model oprations
@@ -50,15 +50,15 @@ feature -- model oprations
 			valid_level: 13 <= inlevel and inlevel <= 16
 		do
 			if game_in_progress then
-				error_str := d.e1
+				error_str.make_from_string(d.e1)
 			else
 				d.init (inlevel, indebug_mode)
 				total_max_score := total_max_score + d.max_score
 				game_in_progress := True
 				first_game_started := True
 				game_num := game_num + 1
-				error_str := d.ok_str
-				status_str := d.s2
+				error_str.make_from_string (d.ok_str)
+				status_str.make_from_string (d.s2)
 			end
 		end
 
@@ -71,15 +71,15 @@ feature -- model oprations
 		do
 			status_str.make_empty
 			if not game_in_progress then
-				error_str := d.e2
+				error_str.make_from_string(d.e2)
 			elseif d.player.out_of_ammo then
-				error_str := d.e3
+				error_str.make_from_string(d.e3)
 			elseif not valid_coordinate (row, col) then
-				error_str := d.e5
+				error_str.make_from_string(d.e5)
 			elseif d.map.board [row, col].fired_upon then
-				error_str := d.e6
+				error_str.make_from_string(d.e6)
 			else
-				error_str := d.ok_str
+				error_str.make_from_string(d.ok_str)
 				d.player.fire
 				d.map.board [row, col].set_fired_upon
 				-- check if the coordinates are occupied
@@ -90,13 +90,13 @@ feature -- model oprations
 						d.player.increment_ships_sunk
 						d.player.increment_score (ship.size)
 						total_score := total_score + ship.size
-						status_str := d.s8 (ship.size)
+						status_str.make_from_string(d.s8 (ship.size))
 					else
-						status_str := d.s4
+						status_str.make_from_string(d.s4)
 					end
 				else
 					-- no hit occurred
-					status_str := d.s5
+					status_str.make_from_string(d.s5)
 				end
 			end
 			-- check for end game conditions
@@ -110,17 +110,17 @@ feature -- model oprations
 		do
 			status_str.make_empty
 			if not game_in_progress then
-				error_str := d.e2
+				error_str.make_from_string(d.e2)
 			elseif d.player.bombs = 0 then
-				error_str := d.e4
+				error_str.make_from_string(d.e4)
 			elseif not adjacent_coordinates (row1, col1, row2, col2) then
-				error_str := d.e7
+				error_str.make_from_string(d.e7)
 			elseif not (valid_coordinate (row1, col1) and valid_coordinate (row2, col2)) then
-				error_str := d.e5
+				error_str.make_from_string(d.e5)
 			elseif d.map.board [row1, col1].fired_upon or d.map.board [row2, col2].fired_upon then
-				error_str := d.e6
+				error_str.make_from_string(d.e6)
 			else
-				error_str := d.ok_str
+				error_str.make_from_string(d.ok_str)
 				d.player.bomb
 				-- check for hits
 				ship1 := check_bomb_hit (row1, col1)
@@ -132,18 +132,18 @@ feature -- model oprations
 						-- both sunk
 						d.player.increment_ships_sunk
 						d.player.increment_ships_sunk
-						status_str := d.s9 (ship1.size, ship2.size)
+						status_str.make_from_string(d.s9 (ship1.size, ship2.size))
 					elseif ship1.health = 0 and ship2.health /= 0 then
 						 -- 1st coordinates sunk a ship, 2nd did not
 						d.player.increment_ships_sunk
-						status_str := d.s8 (ship1.size)
+						status_str.make_from_string(d.s8 (ship1.size))
 					elseif ship1.health /= 0 and ship2.health = 0 then
 						-- 2nd coordinates sunk a ship, 1st did not
 						d.player.increment_ships_sunk
-						status_str := d.s8 (ship2.size)
+						status_str.make_from_string(d.s8 (ship2.size))
 					else
 						-- no sinkages
-						status_str := d.s4
+						status_str.make_from_string(d.s4)
 					end
 				elseif ship1 /= Void and ship2 = Void then
 					-- only 1st coordinates hit
@@ -151,9 +151,9 @@ feature -- model oprations
 						d.player.increment_ships_sunk
 						d.player.increment_score (ship1.size)
 						total_score := total_score + ship1.size
-						status_str := d.s8 (ship1.size)
+						status_str.make_from_string(d.s8 (ship1.size))
 					else
-						status_str := d.s4
+						status_str.make_from_string(d.s4)
 					end
 				elseif ship1 = Void and ship2 /= Void then
 					-- only 2nd coordinates hit
@@ -161,13 +161,13 @@ feature -- model oprations
 						d.player.increment_ships_sunk
 						d.player.increment_score (ship2.size)
 						total_score := total_score + ship2.size
-						status_str := d.s8 (ship2.size)
+						status_str.make_from_string(d.s8 (ship2.size))
 					else
-						status_str := d.s4
+						status_str.make_from_string(d.s4)
 					end
 				else
 					-- no hits
-					status_str := d.s5
+					status_str.make_from_string(d.s5)
 				end
 			end
 			check_game_over
@@ -196,12 +196,12 @@ feature{NONE} -- private helpers
 		do
 			if d.num_ships = d.player.ships_sunk then
 				game_in_progress := False
-				status_str.append (" " + d.s6)
+				status_str.append (d.s6)
 			elseif d.player.out_of_ammo and d.player.out_of_bombs then
 				game_in_progress := False
-				status_str.append (" " + d.s7)
+				status_str.append (d.s7)
 			else
-				status_str.append (" " + d.s3)
+				status_str.append (d.s3)
 			end
 		end
 
@@ -213,7 +213,6 @@ feature{NONE} -- private helpers
 				ship.hit
 				Result := ship
 			end
-
 		end
 
 feature -- queries
