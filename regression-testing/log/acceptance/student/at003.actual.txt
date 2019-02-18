@@ -1,1 +1,0 @@
-Error: current mode is ETF GUI (no command line arguments).

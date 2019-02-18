@@ -1,0 +1,3 @@
+  state 0 OK -> Start a new game
+->debug_test(easy)
+  state 2 OK -> Start a new game

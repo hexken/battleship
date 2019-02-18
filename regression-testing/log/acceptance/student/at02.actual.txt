@@ -1,0 +1,63 @@
+  state 0 OK -> Start a new game
+->debug_test(hard)
+  state 2 OK -> Start a new game
+->debug_test(advanced)
+  state 4 OK -> Start a new game
+->fire([G, 2])
+  state 6 OK -> Start a new game
+->bomb([G, 2],[G, 3])
+  state 8 OK -> Start a new game
+->bomb([G, 2],[G, 2])
+  state 10 OK -> Start a new game
+->bomb([G, 3],[G, 4])
+  state 12 OK -> Start a new game
+->fire([F, 6])
+  state 14 OK -> Start a new game
+->fire([H, 6])
+  state 16 OK -> Start a new game
+->bomb([G, 5],[G, 6])
+  state 18 OK -> Start a new game
+->bomb([G, 6],[G, 5])
+  state 20 OK -> Start a new game
+->debug_test(easy)
+  state 22 OK -> Start a new game
+->bomb([D, 2],[C, 2])
+  state 24 OK -> Start a new game
+->bomb([B, 8],[C, 8])
+  state 26 OK -> Start a new game
+->bomb([D, 8],[E, 8])
+  state 28 OK -> Start a new game
+->bomb([F, 8],[G, 8])
+  state 30 OK -> Start a new game
+->fire([F, 8])
+  state 32 OK -> Start a new game
+->fire([G, 8])
+  state 34 OK -> Start a new game
+->fire([F, 9])
+  state 36 OK -> Start a new game
+->fire([H, 8])
+  state 38 OK -> Start a new game
+->fire([A, 8])
+  state 40 OK -> Start a new game
+->debug_test(easy)
+  state 42 OK -> Start a new game
+->bomb([C, 2],[C, 3])
+  state 44 OK -> Start a new game
+->fire([D, 4])
+  state 46 OK -> Start a new game
+->fire([D, 4])
+  state 48 OK -> Start a new game
+->new_game(easy)
+  state 49 OK -> Fire Away!
+     1  2  3  4
+  A  _  _  _  _
+  B  _  _  _  _
+  C  _  _  _  _
+  D  _  _  _  _
+  Current Game: 1
+  Shots: 0/8
+  Bombs: 0/2
+  Score: 0/3 (Total: 0/3)
+  Ships: 0/2
+    2x1: Not Sunk
+    1x1: Not Sunk

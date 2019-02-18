@@ -10,7 +10,7 @@ class
 create{GAME_DATA_ACCESS}
 	make
 
-feature{NONE} -- error strings
+feature{GAME} -- error strings
 
 	e1: STRING
 		once
@@ -47,7 +47,7 @@ feature{NONE} -- error strings
 			Result := "Bomb coordinates must be adjacent"
 		end
 
-feature{NONE} -- Game messages
+feature{GAME} -- Game messages
 
 	s1: STRING
 		once
@@ -111,6 +111,8 @@ feature -- attributes (data)
 	board_size: INTEGER
 	num_ships: INTEGER
 	max_score: INTEGER
+	max_ammo: INTEGER
+	max_bombs: INTEGER
 
 	rand_gen: RANDOM_GENERATOR
 			-- random generator for normal mode
@@ -135,6 +137,7 @@ feature{GAME_DATA_ACCESS} -- constructor
 
 	make
 		do
+			game_over := True
 			create ships.make (2)
 			create player.make
 			create map.make
@@ -145,7 +148,7 @@ feature{GAME} -- init the data
 	init (inlevel: INTEGER; indebug_mode: BOOLEAN)
 			-- set the game mode, rebase the ETF enums
 		require
-			game_over: game_over
+			game_over: game_over = True
 			valid_level: 13 <= inlevel and inlevel <= 16
 		do
 			level := inlevel - 13
@@ -156,25 +159,31 @@ feature{GAME} -- init the data
 			when 0 then
 				board_size := 4
 				max_score := 3
-				player.ammo := 8
-				player.bombs := 2
+				num_ships := 2
+				max_ammo := 8
+				max_bombs := 2
 			when 1 then
 				board_size := 6
 				max_score := 6
-				player.ammo := 16
-				player.bombs := 3
+				num_ships := 3
+				max_ammo := 16
+				max_bombs := 3
 			when 2 then
 				board_size := 8
 				max_score := 15
-				player.ammo := 24
-				player.bombs := 5
+				num_ships := 5
+				max_ammo := 24
+				max_bombs := 5
 			when 3 then
 				board_size := 12
 				max_score := 28
-				player.ammo := 40
-				player.bombs := 7
+				num_ships := 7
+				max_ammo := 40
+				max_bombs := 7
 			end
 
+			player.ammo := max_ammo
+			player.bombs := max_bombs
 			map.set_empty_board (board_size, board_size)
 			generate_ships
 			place_new_ships
