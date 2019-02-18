@@ -42,7 +42,7 @@
     2x1: [C, 2]->v;[D, 2]->v
     1x1: [B, 8]->v
 ->fire([G, 2])
-  state 4 Game already started -> Fire Away!
+  state 3 Game already started -> Fire Away!
      1  2  3  4  5  6  7  8
   A  _  _  _  _  _  _  _  _
   B  _  _  _  _  _  _  _  v
@@ -63,7 +63,7 @@
     2x1: [C, 2]->v;[D, 2]->v
     1x1: [B, 8]->v
 ->bomb([G, 2],[G, 3])
-  state 6 Game already started -> Fire Away!
+  state 4 Game already started -> Fire Away!
      1  2  3  4  5  6  7  8
   A  _  _  _  _  _  _  _  _
   B  _  _  _  _  _  _  _  v
@@ -84,7 +84,7 @@
     2x1: [C, 2]->v;[D, 2]->v
     1x1: [B, 8]->v
 ->bomb([G, 2],[G, 2])
-  state 8 Game already started -> Fire Away!
+  state 5 Game already started -> Fire Away!
      1  2  3  4  5  6  7  8
   A  _  _  _  _  _  _  _  _
   B  _  _  _  _  _  _  _  v
@@ -105,7 +105,7 @@
     2x1: [C, 2]->v;[D, 2]->v
     1x1: [B, 8]->v
 ->bomb([G, 3],[G, 4])
-  state 10 Game already started -> Fire Away!
+  state 6 Game already started -> Fire Away!
      1  2  3  4  5  6  7  8
   A  _  _  _  _  _  _  _  _
   B  _  _  _  _  _  _  _  v
@@ -126,7 +126,7 @@
     2x1: [C, 2]->v;[D, 2]->v
     1x1: [B, 8]->v
 ->fire([F, 6])
-  state 12 Game already started -> Fire Away!
+  state 7 Game already started -> Fire Away!
      1  2  3  4  5  6  7  8
   A  _  _  _  _  _  _  _  _
   B  _  _  _  _  _  _  _  v
@@ -147,7 +147,7 @@
     2x1: [C, 2]->v;[D, 2]->v
     1x1: [B, 8]->v
 ->fire([H, 6])
-  state 14 Game already started -> Fire Away!
+  state 8 Game already started -> Fire Away!
      1  2  3  4  5  6  7  8
   A  _  _  _  _  _  _  _  _
   B  _  _  _  _  _  _  _  v
@@ -168,7 +168,7 @@
     2x1: [C, 2]->v;[D, 2]->v
     1x1: [B, 8]->v
 ->bomb([G, 5],[G, 6])
-  state 16 Game already started -> Fire Away!
+  state 9 Game already started -> Fire Away!
      1  2  3  4  5  6  7  8
   A  _  _  _  _  _  _  _  _
   B  _  _  _  _  _  _  _  v
@@ -189,7 +189,7 @@
     2x1: [C, 2]->v;[D, 2]->v
     1x1: [B, 8]->v
 ->bomb([G, 6],[G, 5])
-  state 18 Game already started -> Fire Away!
+  state 10 Game already started -> Fire Away!
      1  2  3  4  5  6  7  8
   A  _  _  _  _  _  _  _  _
   B  _  _  _  _  _  _  _  v
@@ -210,7 +210,7 @@
     2x1: [C, 2]->v;[D, 2]->v
     1x1: [B, 8]->v
 ->debug_test(easy)
-  state 19 Game already started -> Fire Away!
+  state 11 Game already started -> Fire Away!
      1  2  3  4  5  6  7  8
   A  _  _  _  _  _  _  _  _
   B  _  _  _  _  _  _  _  v
@@ -231,7 +231,7 @@
     2x1: [C, 2]->v;[D, 2]->v
     1x1: [B, 8]->v
 ->bomb([D, 2],[C, 2])
-  state 21 Game already started -> Fire Away!
+  state 12 Game already started -> Fire Away!
      1  2  3  4  5  6  7  8
   A  _  _  _  _  _  _  _  _
   B  _  _  _  _  _  _  _  v
@@ -252,7 +252,7 @@
     2x1: [C, 2]->v;[D, 2]->v
     1x1: [B, 8]->v
 ->bomb([B, 8],[C, 8])
-  state 23 Game already started -> Fire Away!
+  state 13 Game already started -> Fire Away!
      1  2  3  4  5  6  7  8
   A  _  _  _  _  _  _  _  _
   B  _  _  _  _  _  _  _  v
@@ -273,7 +273,7 @@
     2x1: [C, 2]->v;[D, 2]->v
     1x1: [B, 8]->v
 ->bomb([D, 8],[E, 8])
-  state 25 Game already started -> Fire Away!
+  state 14 Game already started -> Fire Away!
      1  2  3  4  5  6  7  8
   A  _  _  _  _  _  _  _  _
   B  _  _  _  _  _  _  _  v
@@ -294,7 +294,7 @@
     2x1: [C, 2]->v;[D, 2]->v
     1x1: [B, 8]->v
 ->bomb([F, 8],[G, 8])
-  state 27 Game already started -> Fire Away!
+  state 15 Game already started -> Fire Away!
      1  2  3  4  5  6  7  8
   A  _  _  _  _  _  _  _  _
   B  _  _  _  _  _  _  _  v
@@ -315,7 +315,7 @@
     2x1: [C, 2]->v;[D, 2]->v
     1x1: [B, 8]->v
 ->fire([F, 8])
-  state 29 Game already started -> Fire Away!
+  state 16 Game already started -> Fire Away!
      1  2  3  4  5  6  7  8
   A  _  _  _  _  _  _  _  _
   B  _  _  _  _  _  _  _  v
@@ -336,7 +336,7 @@
     2x1: [C, 2]->v;[D, 2]->v
     1x1: [B, 8]->v
 ->fire([G, 8])
-  state 31 Game already started -> Fire Away!
+  state 17 Game already started -> Fire Away!
      1  2  3  4  5  6  7  8
   A  _  _  _  _  _  _  _  _
   B  _  _  _  _  _  _  _  v
@@ -357,7 +357,7 @@
     2x1: [C, 2]->v;[D, 2]->v
     1x1: [B, 8]->v
 ->fire([F, 9])
-  state 33 Game already started -> Fire Away!
+  state 18 Game already started -> Fire Away!
      1  2  3  4  5  6  7  8
   A  _  _  _  _  _  _  _  _
   B  _  _  _  _  _  _  _  v
@@ -378,7 +378,7 @@
     2x1: [C, 2]->v;[D, 2]->v
     1x1: [B, 8]->v
 ->fire([H, 8])
-  state 35 Game already started -> Fire Away!
+  state 19 Game already started -> Fire Away!
      1  2  3  4  5  6  7  8
   A  _  _  _  _  _  _  _  _
   B  _  _  _  _  _  _  _  v
@@ -399,7 +399,7 @@
     2x1: [C, 2]->v;[D, 2]->v
     1x1: [B, 8]->v
 ->fire([A, 8])
-  state 37 Game already started -> Fire Away!
+  state 20 Game already started -> Fire Away!
      1  2  3  4  5  6  7  8
   A  _  _  _  _  _  _  _  _
   B  _  _  _  _  _  _  _  v
@@ -420,7 +420,7 @@
     2x1: [C, 2]->v;[D, 2]->v
     1x1: [B, 8]->v
 ->debug_test(easy)
-  state 38 Game already started -> Fire Away!
+  state 21 Game already started -> Fire Away!
      1  2  3  4  5  6  7  8
   A  _  _  _  _  _  _  _  _
   B  _  _  _  _  _  _  _  v
@@ -441,7 +441,7 @@
     2x1: [C, 2]->v;[D, 2]->v
     1x1: [B, 8]->v
 ->bomb([C, 2],[C, 3])
-  state 40 Game already started -> Fire Away!
+  state 22 Game already started -> Fire Away!
      1  2  3  4  5  6  7  8
   A  _  _  _  _  _  _  _  _
   B  _  _  _  _  _  _  _  v
@@ -462,7 +462,7 @@
     2x1: [C, 2]->v;[D, 2]->v
     1x1: [B, 8]->v
 ->fire([D, 4])
-  state 42 Game already started -> Fire Away!
+  state 23 Game already started -> Fire Away!
      1  2  3  4  5  6  7  8
   A  _  _  _  _  _  _  _  _
   B  _  _  _  _  _  _  _  v
@@ -483,7 +483,7 @@
     2x1: [C, 2]->v;[D, 2]->v
     1x1: [B, 8]->v
 ->fire([D, 4])
-  state 44 Game already started -> Fire Away!
+  state 24 Game already started -> Fire Away!
      1  2  3  4  5  6  7  8
   A  _  _  _  _  _  _  _  _
   B  _  _  _  _  _  _  _  v
@@ -504,7 +504,7 @@
     2x1: [C, 2]->v;[D, 2]->v
     1x1: [B, 8]->v
 ->new_game(easy)
-  state 45 Game already started -> Fire Away!
+  state 25 Game already started -> Fire Away!
      1  2  3  4  5  6  7  8
   A  _  _  _  _  _  _  _  _
   B  _  _  _  _  _  _  _  v

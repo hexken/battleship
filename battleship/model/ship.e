@@ -36,6 +36,15 @@ feature{GAME_DATA} -- constructors
 			row = inrow and col = incol and dir = indir
 		end
 
+feature{GAME} --commands
+
+	hit
+		do
+			health := health - 1
+		ensure
+			health >= 0
+		end
+
 invariant
 	valid_size: size > 0
 	valid_dir: dir = 0 or dir = 1

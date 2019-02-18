@@ -42,16 +42,6 @@ feature -- constructor
 
 feature -- model oprations
 
-	fire (row: INTEGER; col: INTEGER)
-		do
-
-		end
-
-	bomb (row1, col1, row2, col2: INTEGER)
-		do
-			
-		end
-
 	new_game (inlevel: INTEGER; indebug_mode: BOOLEAN)
 		require
 			valid_level: 13 <= inlevel and inlevel <= 16
@@ -73,11 +63,74 @@ feature -- model oprations
 			new_game (inlevel, True)
 		end
 
+	fire (row: INTEGER; col: INTEGER)
+		do
+			if not game_in_progress then
+				status_str := d.e2
+			elseif d.player.ammo = 0 then
+				status_str := d.e3
+			elseif not valid_coordinate (row, col) then
+				status_str := d.e5
+			elseif d.map.board [row, col].fired_upon then
+				status_str := d.e6
+			else
+				d.player.fire
+				msg_str := d.s3
+				if attached d.map.board [row, col].ship as ship then
+					status_str := d.s4
+					ship.hit
+					d.map.board [row, col].set_symbol (create {SHIP_ALPHABET}.make ('X'))
+				else
+					status_str := d.s5
+					d.map.board [row, col].set_symbol (create {SHIP_ALPHABET}.make ('O'))
+				end
+			end
+		end
+
+	bomb (row1, col1, row2, col2: INTEGER)
+		do
+			if not game_in_progress then
+				status_str := d.e2
+			elseif d.player.bombs = 0 then
+				status_str := d.e4
+			elseif not adjacent_coordinates (row1, col1, row2, col2) then
+				status_str := d.e7
+			elseif not (valid_coordinate (row1, col1) and valid_coordinate (row2, col2)) then
+				status_str := d.e5
+			elseif d.map.board [row1, col1].fired_upon or d.map.board [row2, col2].fired_upon then
+				status_str := d.e6
+			else
+				d.player.bomb
+				if attached d.map.board [row, col].ship as ship then
+					status_str := d.s4
+					msg_str := d.s3
+					ship.hit
+					d.map.board [row, col].set_symbol (create {SHIP_ALPHABET}.make ('X'))
+				else
+					status_str := d.s5
+					msg_str := d.s3
+					d.map.board [row, col].set_symbol (create {SHIP_ALPHABET}.make ('O'))
+				end
+			end
+		end
+
 	reset
 		do
 
 		end
+feature{NONE} -- private helpers
 
+	valid_coordinate (row, col: INTEGER): BOOLEAN
+		do
+			Result := (1 <= row and row <= d.board_size) and
+					  (1 <= col and col <= d.board_size)
+		end
+
+	adjacent_coordinates (row1, col1, row2, col2: INTEGER): BOOLEAN
+		do
+			Result := (row1 = row2 and (col1 = col2 + 1 or col1 = col2 - 1)) or
+					  (col1 = col2 and (row1 = row2 + 1 or row1 = row2 - 1))
+		end
 feature -- queries
 	out : STRING
 		local

@@ -24,12 +24,12 @@ feature{GAME_DATA} -- contructor
 
 feature -- commands
 
-	fire: BOOLEAN
+	fire
 		do
 			ammo := ammo - 1
 		end
 
-	bomb: BOOLEAN
+	bomb
 		do
 			bombs := bombs - 1
 		end

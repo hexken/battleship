@@ -14,6 +14,20 @@
     2x1: [B, 4]->v;[C, 4]->v
     1x1: [C, 3]->h
 ->fire([A, 4])
+  state 2 OK -> Fire Away!
+     1  2  3  4
+  A  _  _  _  _
+  B  _  _  _  v
+  C  _  _  h  v
+  D  _  _  _  _
+  Current Game (debug): 1
+  Shots: 0/8
+  Bombs: 0/2
+  Score: 0/3 (Total: 0/3)
+  Ships: 0/2
+    2x1: [B, 4]->v;[C, 4]->v
+    1x1: [C, 3]->h
+->fire([B, 4])
   state 3 OK -> Fire Away!
      1  2  3  4
   A  _  _  _  _
@@ -27,22 +41,8 @@
   Ships: 0/2
     2x1: [B, 4]->v;[C, 4]->v
     1x1: [C, 3]->h
-->fire([B, 4])
-  state 5 OK -> Fire Away!
-     1  2  3  4
-  A  _  _  _  _
-  B  _  _  _  v
-  C  _  _  h  v
-  D  _  _  _  _
-  Current Game (debug): 1
-  Shots: 0/8
-  Bombs: 0/2
-  Score: 0/3 (Total: 0/3)
-  Ships: 0/2
-    2x1: [B, 4]->v;[C, 4]->v
-    1x1: [C, 3]->h
 ->bomb([C, 4],[D, 4])
-  state 7 OK -> Fire Away!
+  state 4 OK -> Fire Away!
      1  2  3  4
   A  _  _  _  _
   B  _  _  _  v
@@ -56,7 +56,7 @@
     2x1: [B, 4]->v;[C, 4]->v
     1x1: [C, 3]->h
 ->bomb([C, 3],[C, 2])
-  state 9 OK -> Fire Away!
+  state 5 OK -> Fire Away!
      1  2  3  4
   A  _  _  _  _
   B  _  _  _  v
@@ -70,7 +70,7 @@
     2x1: [B, 4]->v;[C, 4]->v
     1x1: [C, 3]->h
 ->debug_test(medium)
-  state 10 Game already started -> Fire Away!
+  state 6 Game already started -> Fire Away!
      1  2  3  4
   A  _  _  _  _
   B  _  _  _  v
@@ -84,7 +84,7 @@
     2x1: [B, 4]->v;[C, 4]->v
     1x1: [C, 3]->h
 ->bomb([A, 1],[A, 2])
-  state 12 Game already started -> Fire Away!
+  state 7 Game already started -> Fire Away!
      1  2  3  4
   A  _  _  _  _
   B  _  _  _  v
@@ -98,7 +98,7 @@
     2x1: [B, 4]->v;[C, 4]->v
     1x1: [C, 3]->h
 ->bomb([A, 4],[A, 3])
-  state 14 Game already started -> Fire Away!
+  state 8 Game already started -> Fire Away!
      1  2  3  4
   A  _  _  _  _
   B  _  _  _  v
@@ -112,7 +112,7 @@
     2x1: [B, 4]->v;[C, 4]->v
     1x1: [C, 3]->h
 ->bomb([A, 5],[A, 6])
-  state 16 Game already started -> Fire Away!
+  state 9 Game already started -> Fire Away!
      1  2  3  4
   A  _  _  _  _
   B  _  _  _  v
@@ -126,7 +126,7 @@
     2x1: [B, 4]->v;[C, 4]->v
     1x1: [C, 3]->h
 ->fire([B, 1])
-  state 18 Game already started -> Fire Away!
+  state 10 Game already started -> Fire Away!
      1  2  3  4
   A  _  _  _  _
   B  _  _  _  v
@@ -140,7 +140,7 @@
     2x1: [B, 4]->v;[C, 4]->v
     1x1: [C, 3]->h
 ->fire([B, 2])
-  state 20 Game already started -> Fire Away!
+  state 11 Game already started -> Fire Away!
      1  2  3  4
   A  _  _  _  _
   B  _  _  _  v
@@ -154,7 +154,7 @@
     2x1: [B, 4]->v;[C, 4]->v
     1x1: [C, 3]->h
 ->fire([B, 3])
-  state 22 Game already started -> Fire Away!
+  state 12 Game already started -> Fire Away!
      1  2  3  4
   A  _  _  _  _
   B  _  _  _  v
@@ -168,7 +168,7 @@
     2x1: [B, 4]->v;[C, 4]->v
     1x1: [C, 3]->h
 ->fire([B, 4])
-  state 24 Game already started -> Fire Away!
+  state 13 Game already started -> Fire Away!
      1  2  3  4
   A  _  _  _  _
   B  _  _  _  v
@@ -182,7 +182,7 @@
     2x1: [B, 4]->v;[C, 4]->v
     1x1: [C, 3]->h
 ->fire([B, 5])
-  state 26 Game already started -> Fire Away!
+  state 14 Game already started -> Fire Away!
      1  2  3  4
   A  _  _  _  _
   B  _  _  _  v
@@ -196,7 +196,7 @@
     2x1: [B, 4]->v;[C, 4]->v
     1x1: [C, 3]->h
 ->fire([B, 6])
-  state 28 Game already started -> Fire Away!
+  state 15 Game already started -> Fire Away!
      1  2  3  4
   A  _  _  _  _
   B  _  _  _  v
@@ -210,7 +210,7 @@
     2x1: [B, 4]->v;[C, 4]->v
     1x1: [C, 3]->h
 ->fire([C, 1])
-  state 30 Game already started -> Fire Away!
+  state 16 Game already started -> Fire Away!
      1  2  3  4
   A  _  _  _  _
   B  _  _  _  v
@@ -224,7 +224,7 @@
     2x1: [B, 4]->v;[C, 4]->v
     1x1: [C, 3]->h
 ->fire([C, 2])
-  state 32 Game already started -> Fire Away!
+  state 17 Game already started -> Fire Away!
      1  2  3  4
   A  _  _  _  _
   B  _  _  _  v
@@ -238,7 +238,7 @@
     2x1: [B, 4]->v;[C, 4]->v
     1x1: [C, 3]->h
 ->fire([C, 3])
-  state 34 Game already started -> Fire Away!
+  state 18 Game already started -> Fire Away!
      1  2  3  4
   A  _  _  _  _
   B  _  _  _  v
@@ -252,7 +252,7 @@
     2x1: [B, 4]->v;[C, 4]->v
     1x1: [C, 3]->h
 ->fire([C, 4])
-  state 36 Game already started -> Fire Away!
+  state 19 Game already started -> Fire Away!
      1  2  3  4
   A  _  _  _  _
   B  _  _  _  v
@@ -266,7 +266,7 @@
     2x1: [B, 4]->v;[C, 4]->v
     1x1: [C, 3]->h
 ->fire([C, 5])
-  state 38 Game already started -> Fire Away!
+  state 20 Game already started -> Fire Away!
      1  2  3  4
   A  _  _  _  _
   B  _  _  _  v
@@ -280,7 +280,7 @@
     2x1: [B, 4]->v;[C, 4]->v
     1x1: [C, 3]->h
 ->fire([C, 6])
-  state 40 Game already started -> Fire Away!
+  state 21 Game already started -> Fire Away!
      1  2  3  4
   A  _  _  _  _
   B  _  _  _  v
@@ -294,7 +294,7 @@
     2x1: [B, 4]->v;[C, 4]->v
     1x1: [C, 3]->h
 ->fire([D, 1])
-  state 42 Game already started -> Fire Away!
+  state 22 Game already started -> Fire Away!
      1  2  3  4
   A  _  _  _  _
   B  _  _  _  v
@@ -308,7 +308,7 @@
     2x1: [B, 4]->v;[C, 4]->v
     1x1: [C, 3]->h
 ->fire([D, 2])
-  state 44 Game already started -> Fire Away!
+  state 23 Game already started -> Fire Away!
      1  2  3  4
   A  _  _  _  _
   B  _  _  _  v
@@ -322,7 +322,7 @@
     2x1: [B, 4]->v;[C, 4]->v
     1x1: [C, 3]->h
 ->fire([D, 3])
-  state 46 Game already started -> Fire Away!
+  state 24 Game already started -> Fire Away!
      1  2  3  4
   A  _  _  _  _
   B  _  _  _  v
@@ -336,7 +336,7 @@
     2x1: [B, 4]->v;[C, 4]->v
     1x1: [C, 3]->h
 ->fire([D, 4])
-  state 48 Game already started -> Fire Away!
+  state 25 Game already started -> Fire Away!
      1  2  3  4
   A  _  _  _  _
   B  _  _  _  v
@@ -350,7 +350,7 @@
     2x1: [B, 4]->v;[C, 4]->v
     1x1: [C, 3]->h
 ->debug_test(hard)
-  state 49 Game already started -> Fire Away!
+  state 26 Game already started -> Fire Away!
      1  2  3  4
   A  _  _  _  _
   B  _  _  _  v
