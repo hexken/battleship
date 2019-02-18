@@ -18,16 +18,18 @@ create {GAME_ACCESS}
 
 feature -- model attributes
 
-	data: GAME_DATA
+	data: detachable GAME_DATA
 	state : INTEGER
 
 feature -- model operations
 
-	make (inlevel: INTEGER; indebug_mode: BOOLEAN)
+	make do end
+
+	init_game (inlevel: INTEGER; indebug_mode: BOOLEAN)
 		local
 			data_access: GAME_DATA_ACCESS
 		do
-			data := data_access.init_data (inlevel, indebug_mode)
+			data := data_access.data
 			state := 0
 
 		end

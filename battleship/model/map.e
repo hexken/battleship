@@ -18,7 +18,7 @@ create {GAME_DATA}
 
 feature -- attributes
 
-	board: ARRAY2[SHIP_ALPHABET]
+	board: ARRAY2[MAP_TILE]
 	rows: INTEGER
 	cols: INTEGER
 
@@ -34,7 +34,7 @@ feature{GAME_DATA} -- constructor
 		do
 			rows := inrows
 			cols := incols
-			create board.make_filled (create {SHIP_ALPHABET}.make ('_'), rows, cols)
+			create board.make_filled (create {MAP_TILE}.make, rows, cols)
 		end
 
 feature{NONE} -- utilities

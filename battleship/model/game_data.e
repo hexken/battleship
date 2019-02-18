@@ -41,14 +41,17 @@ feature -- attributes (data)
 			create result.make_debug
 		end
 
-	player: PLAYER
-	map: MAP
-	ships: ARRAYED_LIST [SHIP]
+	player: detachable PLAYER
+	map: detachable MAP
+	ships: detachable ARRAYED_LIST [SHIP]
 
 
 feature{GAME_DATA_ACCESS} -- constructor
 
-	make (inlevel: INTEGER; indebug_mode: BOOLEAN)
+	make do end
+
+feature{GAME} -- init the data
+	init (inlevel: INTEGER; indebug_mode: BOOLEAN)
 			-- set the game mode, rebase the ETF enums
 		require
 			game_over: game_over
@@ -74,7 +77,7 @@ feature{NONE} -- private game init helpers
 		local
 			size: INTEGER
 			c,r : INTEGER
-			d: BOOLEAN
+			d: INTEGER
 			gen: RANDOM_GENERATOR
 			new_ship: SHIP
 		do
@@ -98,7 +101,7 @@ feature{NONE} -- private game init helpers
 					c := (gen.column \\ (board_size - size)) + 1
 				end
 
-				new_ship.make (size, r, c, d)
+				create new_ship.make (size, r, c, d)
 
 				if not collide_with (Result, new_ship) then
 					-- If the generated ship does not collide with
@@ -113,7 +116,7 @@ feature{NONE} -- private game init helpers
 			-- not sure how to best check this
 		end
 
-	collide_with_each_other (ship1, ship2: TUPLE[size: INTEGER; row: INTEGER; col: INTEGER; dir: BOOLEAN]): BOOLEAN
+	collide_with_each_other (ship1, ship2: SHIP): BOOLEAN
 				-- Does `ship1' collide with `ship2'?
 			local
 				ship1_head_row, ship1_head_col, ship1_tail_row, ship1_tail_col: INTEGER
@@ -121,7 +124,7 @@ feature{NONE} -- private game init helpers
 			do
 					ship1_tail_row := ship1.row
 					ship1_tail_col := ship1.col
-					if ship1.dir then
+					if ship1.dir = 1 then
 						ship1_tail_row := ship1_tail_row + 1
 						ship1_head_row := ship1_tail_row + ship1.size - 1
 						ship1_head_col := ship1_tail_col
@@ -133,7 +136,7 @@ feature{NONE} -- private game init helpers
 
 					ship2_tail_row := ship2.row
 					ship2_tail_col := ship2.col
-					if ship2.dir then
+					if ship2.dir = 1 then
 						ship2_tail_row := ship2_tail_row + 1
 						ship2_head_row := ship2_tail_row + ship2.size - 1
 						ship2_head_col := ship2_tail_col
@@ -150,8 +153,7 @@ feature{NONE} -- private game init helpers
  						ship1_head_row >= ship2_tail_row
 			end
 
-	collide_with (existing_ships: ARRAYED_LIST[TUPLE[size: INTEGER; row: INTEGER; col: INTEGER; dir: BOOLEAN]];
-		new_ship: TUPLE[size: INTEGER; row: INTEGER; col: INTEGER; dir: BOOLEAN]): BOOLEAN
+	collide_with (existing_ships: ARRAYED_LIST [SHIP]; new_ship: SHIP): BOOLEAN
 				-- Does `new_ship' collide with the set of `existing_ships'?
 			do
 					across
@@ -161,7 +163,7 @@ feature{NONE} -- private game init helpers
 					end
 			ensure
 				Result =
-					across existing_ships as existing_ship
+					across (old existing_ships.deep_twin) as existing_ship
 					some
 						collide_with_each_other (new_ship, existing_ship.item)
 					end
