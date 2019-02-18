@@ -16,9 +16,10 @@ inherit
 create {GAME_ACCESS}
 	make
 
-feature -- model attributes
+feature{NONE} -- model attributes
 
 	d: GAME_DATA
+
 	game_in_progress: BOOLEAN
 	game_num: INTEGER
 	state : INTEGER
@@ -46,9 +47,9 @@ feature -- model oprations
 
 		end
 
-	bomb (row1, row2, col1, col2: INTEGER)
+	bomb (row1, col1, row2, col2: INTEGER)
 		do
-
+			
 		end
 
 	new_game (inlevel: INTEGER; indebug_mode: BOOLEAN)
@@ -70,11 +71,6 @@ feature -- model oprations
 	debug_test (inlevel: INTEGER)
 		do
 			new_game (inlevel, True)
-		end
-
-	default_update
-		do
-			state := state + 1
 		end
 
 	reset
