@@ -1,4 +1,4 @@
-note
+ote
 	description: "Summary description for {COORDINATE}."
 	author: ""
 	date: "$Date$"

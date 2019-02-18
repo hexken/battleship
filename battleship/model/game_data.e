@@ -10,15 +10,92 @@ class
 create{GAME_DATA_ACCESS}
 	make
 
-feature{NONE} -- constants
+feature{NONE} -- error strings
 
-	max_rows: INTEGER
+	e1: STRING
 		once
-			Result := 12
+			Result := "Game already started"
 		end
-	max_cols: INTEGER
+
+	e2: STRING
 		once
-			Result := 12
+			Result := "Game not started"
+		end
+
+	e3: STRING
+		once
+			Result := "No shots remaining"
+		end
+
+	e4: STRING
+		once
+			Result := "No bombs remaining"
+		end
+
+	e5: STRING
+		once
+			Result := "Invalid coordinates"
+		end
+
+	e6: STRING
+		once
+			Result := "Already fired there"
+		end
+
+	e7: STRING
+		once
+			Result := "Bomb coordinates must be adjacent"
+		end
+
+feature{NONE} -- Game messages
+
+	s1: STRING
+		once
+			Result := "Start a new game"
+		end
+
+	s2: STRING
+		once
+			Result := "Fire Away!"
+		end
+
+	s3: STRING
+		once
+			Result := "Keep Firing!"
+		end
+
+	s4: STRING
+		once
+			Result := "Hit!"
+		end
+
+	s5: STRING
+		once
+			Result := "Miss!"
+		end
+
+	s6: STRING
+		once
+			Result := "You Win!"
+		end
+
+	s7: STRING
+		once
+			Result := "Game Over"
+		end
+
+	s8 (sz: INTEGER): STRING
+		require
+			sz > 0
+		do
+			Result := sz.out + "x1 sunk!"
+		end
+
+	s9 (sz1, sz2: INTEGER): STRING
+		require
+			sz1 > 0 and sz2 > 0
+		do
+			Result := sz1.out + "x1 sunk and " + sz2.out + "x1 sunk!"
 		end
 
 feature -- attributes (data)
@@ -55,7 +132,7 @@ feature{GAME} -- init the data
 			-- set the game mode, rebase the ETF enums
 		require
 			game_over: game_over
-			level_value: 13 <= inlevel and inlevel <= 16
+			valid_level: 13 <= inlevel and inlevel <= 16
 		do
 			level := inlevel - 13
 			game_over := False

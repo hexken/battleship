@@ -7,7 +7,7 @@ note
 class
 	MAP_TILE
 
-create
+create{MAP}
 	make
 
 feature -- attribute
@@ -17,7 +17,7 @@ feature -- attribute
 	occupied: BOOLEAN assign set_occupied
 	fired_upon: BOOLEAN assign set_fired_upon
 
-feature -- constructor
+feature{MAP} -- constructor
 
 	make
 		do
@@ -26,7 +26,7 @@ feature -- constructor
 			fired_upon := False
 		end
 
-feature -- commands
+feature{MAP} -- commands
 
 	set_symbol (insymbol: SHIP_ALPHABET)
 		do

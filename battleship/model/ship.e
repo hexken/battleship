@@ -39,7 +39,7 @@ feature{GAME_DATA} -- constructors
 invariant
 	valid_size: size > 0
 	valid_dir: dir = 0 or dir = 1
-	valid_coords: row >=0 and col >= 0
+	valid_coords: row >= 0 and col >= 0
 	valid_health: health >= 0
 
 end

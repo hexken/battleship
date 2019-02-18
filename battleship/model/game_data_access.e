@@ -7,9 +7,6 @@ note
 expanded class
 	GAME_DATA_ACCESS
 
-create{GAME}
-	default_create
-
 feature{GAME} -- access
 	data: GAME_DATA
 		once
