@@ -14,7 +14,7 @@ inherit
 		end
 
 create {GAME_DATA}
-	empty_board
+	make
 
 feature -- attributes
 
@@ -29,7 +29,13 @@ feature -- attributes
 
 feature{GAME_DATA} -- constructor
 
-	empty_board (inrows: INTEGER; incols: INTEGER)
+	make
+		-- create the map object, board will not be set properly
+		do
+			create board.make_filled (create {MAP_TILE}.make_default, 1, 1)
+		end
+
+	set_empty_board (inrows: INTEGER; incols: INTEGER)
 			-- set initial board
 		require
 			inrows > 0 and incols > 0
@@ -43,7 +49,7 @@ feature{GAME_DATA} -- constructor
 
 feature{NONE} -- utilities
 
-feature{GAME_DATA} -- queries
+feature -- queries
 
 	out: STRING
 			-- Return string representation of current game.

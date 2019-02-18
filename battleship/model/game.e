@@ -18,28 +18,25 @@ create {GAME_ACCESS}
 
 feature -- model attributes
 
-	data: detachable GAME_DATA
+	data: GAME_DATA
 	game_in_progress: BOOLEAN
 	state : INTEGER
 
 feature -- model operations
 
 	make
-		do
-			state := 0
-			game_in_progress := False
-		end
-
-	init_game (inlevel: INTEGER; indebug_mode: BOOLEAN)
 		local
 			data_access: GAME_DATA_ACCESS
 		do
 			data := data_access.data
-			check attached data as d
-				then
-					d.init (inlevel, indebug_mode)
-				end
+			state := -1
+			game_in_progress := False
 
+		end
+
+	init_game (inlevel: INTEGER; indebug_mode: BOOLEAN)
+		do
+			data.init (inlevel, indebug_mode)
 			game_in_progress := True
 		end
 
@@ -55,7 +52,7 @@ feature -- model operations
 
 	new_game (inlevel: INTEGER; indebug_mode: BOOLEAN)
 		do
-
+			init_game (inlevel, indebug_mode)
 		end
 
 	debug_test (inlevel: INTEGER; indebug_mode: BOOLEAN)
@@ -76,11 +73,11 @@ feature -- model operations
 feature -- queries
 	out : STRING
 		do
-			create Result.make_from_string ("  ")
-			Result.append ("System State: default model state ")
-			Result.append ("(")
+			state := state + 1
+			create Result.make_empty
+			Result.append ("state ")
 			Result.append (state.out)
-			Result.append (")")
+			Result.append (data.map.out)
 		end
 
 end

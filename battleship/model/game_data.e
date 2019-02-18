@@ -98,6 +98,11 @@ feature{NONE} -- Game messages
 			Result := sz1.out + "x1 sunk and " + sz2.out + "x1 sunk!"
 		end
 
+	ok_string: STRING
+		once
+			Result := "OK"
+		end
+
 feature -- attributes (data)
 
 	level: INTEGER  -- 0 easy, 1 med, 2 hard, 3 advanced
@@ -121,8 +126,8 @@ feature -- attributes (data)
 			create result.make_debug
 		end
 
-	player: detachable PLAYER
-	map: detachable MAP
+	player: PLAYER
+	map: MAP
 	ships:  ARRAYED_LIST [SHIP]
 
 
@@ -131,6 +136,8 @@ feature{GAME_DATA_ACCESS} -- constructor
 	make
 		do
 			create ships.make (2)
+			create player.make
+			create map.make
 		end
 
 feature{GAME} -- init the data
@@ -149,22 +156,26 @@ feature{GAME} -- init the data
 			when 0 then
 				board_size := 4
 				max_score := 3
-				create player.make (8, 2)
+				player.ammo := 8
+				player.bombs := 2
 			when 1 then
 				board_size := 6
 				max_score := 6
-				create player.make (16, 3)
+				player.ammo := 16
+				player.bombs := 3
 			when 2 then
 				board_size := 8
 				max_score := 15
-				create player.make (24, 5)
+				player.ammo := 24
+				player.bombs := 5
 			when 3 then
 				board_size := 12
 				max_score := 28
-				create player.make (40, 7)
+				player.ammo := 40
+				player.bombs := 7
 			end
 
-			create map.empty_board (board_size, board_size)
+			map.set_empty_board (board_size, board_size)
 			generate_ships
 			place_new_ships
 		ensure
@@ -175,7 +186,7 @@ feature{GAME} -- init the data
 			game_over_set: game_over = False
 		end
 
-feature{NONE} -- private game init helpers
+feature{NONE} -- private data init helpers
 
 
 	generate_ships
@@ -266,13 +277,10 @@ feature{NONE} -- private game init helpers
 	collide_with (new_ship: SHIP): BOOLEAN
 				-- Does `new_ship' collide with the set of `existing_ships'?
 		do
-			check attached ships as s
-			then
-				across
-					ships as existing_ship
-				loop
-					Result := Result or collide_with_each_other (new_ship, existing_ship.item)
-				end
+			across
+				ships as existing_ship
+			loop
+				Result := Result or collide_with_each_other (new_ship, existing_ship.item)
 			end
 		ensure
 			Result =
@@ -294,25 +302,23 @@ feature{NONE} -- private game init helpers
 					end
 				end
 		do
-			check attached map as m
-			then
-				across
-					ships as new_ship
-				loop
-					if new_ship.item.dir = 1 then
-						-- Vertical ship
-						across
-							1 |..| new_ship.item.size as i
-						loop
-							m.board[new_ship.item.row + i.item, new_ship.item.col].make_occupied (new_ship.item, debug_mode)
-						end
-					else
-						-- Horizontal ship
-						across
-							1 |..| new_ship.item.size as i
-						loop
-							m.board[new_ship.item.row, new_ship.item.col + i.item].make_occupied (new_ship.item, debug_mode)
-						end
+
+			across
+				ships as new_ship
+			loop
+				if new_ship.item.dir = 1 then
+					-- Vertical ship
+					across
+						1 |..| new_ship.item.size as i
+					loop
+						map.board[new_ship.item.row + i.item, new_ship.item.col].make_occupied (new_ship.item, debug_mode)
+					end
+				else
+					-- Horizontal ship
+					across
+						1 |..| new_ship.item.size as i
+					loop
+						map.board[new_ship.item.row, new_ship.item.col + i.item].make_occupied (new_ship.item, debug_mode)
 					end
 				end
 			end

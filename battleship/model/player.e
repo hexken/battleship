@@ -13,22 +13,14 @@ create{GAME_DATA}
 feature -- attributes
 
 	ships_sunk: INTEGER
-	ammo: INTEGER
-	bombs: INTEGER
+	ammo: INTEGER assign set_ammo
+	bombs: INTEGER assign set_bombs
 	score: INTEGER
 
 feature{GAME_DATA} -- contructor
 
-	make (am: INTEGER; bo: INTEGER)
-		require
-			am >= 0 and bo >= 0
-		do
+	make do end
 
-			ammo := am
-			bombs := bo
-		ensure
-			ammo = old am and bombs = old bo
-		end
 
 feature -- commands
 
@@ -47,6 +39,24 @@ feature -- commands
 			ships_sunk := ships_sunk + 1
 		ensure
 			ships_sunk = old ships_sunk + 1
+		end
+
+	set_ammo (inammo: INTEGER)
+		require
+			inammo > 0
+		do
+			ammo := inammo
+		ensure
+			ammo = inammo
+		end
+
+	set_bombs (inbombs: INTEGER)
+		require
+			inbombs > 0
+		do
+			bombs := inbombs
+		ensure
+			bombs = inbombs
 		end
 
 
