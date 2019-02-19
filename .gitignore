@@ -1,3 +1,4 @@
 EIFGENs
 regression-testing/log
+regression-testing/__pycache__
 *.html
