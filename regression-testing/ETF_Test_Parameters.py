@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+import os
 
 # Specify the directory (relative or absolute) where the acceptance test 
 # files are. If nothing is added, current directory is used.
@@ -28,7 +29,17 @@ is_expected = False
 oracle = "../oracle.exe"
 
 # Specify the path of the executable built from your project.
-executable = "../EIFGENs/battleship/W_code/battleship"
+dirname = os.path.dirname(os.path.realpath(__file__))
+os.chdir(dirname)
+wcode = "../EIFGENs/battleship/W_code/battleship"
+fcode = "../EIFGENs/battleship/F_code/battleship"
+executable = ""
+if os.path.exists(wcode):
+    executable = wcode
+elif os.path.exists(fcode):
+    executable = fcode
+# executable = "../EIFGENs/battleship/F_code/battleship"
+
 # The above is an OSX executable
 # Linux executable for students shaler be called: oracle.exe
 
