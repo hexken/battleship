@@ -185,7 +185,8 @@ def print_warnings(warnings):
 			sys.exit(1)
 	
 def main():
-	os.chdir('/home/ken/3311/battleship/regression-testing')
+	dirname = os.path.dirname(os.path.realpath(__file__))
+	os.chdir(dirname)
 	warnings = []
 	list = build_list([os.path.join(par.root, fd) for fd in par.acceptance_tests], warnings)
 	list = remove_duplicates(list, warnings)
