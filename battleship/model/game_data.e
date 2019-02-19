@@ -103,10 +103,9 @@ feature{GAME} -- Game messages
 			Result := "OK"
 		end
 
-feature -- attributes (data)
+feature{GAME} -- attributes (data)
 
 	level: INTEGER  -- 0 easy, 1 med, 2 hard, 3 advanced
-	debug_mode: BOOLEAN -- are we in debug mode?
 	board_size: INTEGER
 	num_ships: INTEGER
 	max_score: INTEGER
@@ -149,7 +148,6 @@ feature{GAME} -- init the data
 			valid_level: 13 <= inlevel and inlevel <= 16
 		do
 			level := inlevel - 13
-			debug_mode := indebug_mode
 
 			inspect level
 			when 0 then
@@ -180,8 +178,8 @@ feature{GAME} -- init the data
 
 			player.reset (max_ammo, max_bombs)
 			map.set_empty_board (board_size, board_size)
-			generate_ships
-			place_new_ships
+			generate_ships (indebug_mode)
+			place_new_ships (indebug_mode)
 		ensure
 			level_set:
 				0 <= level and level <= 3 and
@@ -191,7 +189,7 @@ feature{GAME} -- init the data
 feature{NONE} -- private data init helpers
 
 
-	generate_ships
+	generate_ships (debug_mode: BOOLEAN)
 			-- places the ships on the board
 			-- either deterministicly random or completely random depending on debug mode
 		local
@@ -285,7 +283,7 @@ feature{NONE} -- private data init helpers
 					end
 		end
 
-	place_new_ships
+	place_new_ships (indebug_mode: BOOLEAN)
 			-- Place the randomly generated positions of `new_ships' onto the `board'.
 			-- beginning at ship.row, ship.col
 		require
@@ -295,7 +293,6 @@ feature{NONE} -- private data init helpers
 					end
 				end
 		do
-
 			across
 				ships as s
 			loop
@@ -304,14 +301,14 @@ feature{NONE} -- private data init helpers
 					across
 						0 |..| (s.item.size - 1) as i
 					loop
-						map.board[s.item.row + i.item, s.item.col].make_occupied (s.item, debug_mode)
+						map.board[s.item.row + i.item, s.item.col].make_occupied (s.item, indebug_mode)
 					end
 				else
 					-- Horizontal ship
 					across
 						0 |..| (s.item.size - 1) as i
 					loop
-						map.board[s.item.row, s.item.col + i.item].make_occupied (s.item, debug_mode)
+						map.board[s.item.row, s.item.col + i.item].make_occupied (s.item, indebug_mode)
 					end
 				end
 			end

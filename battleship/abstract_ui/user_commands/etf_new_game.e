@@ -20,7 +20,7 @@ feature -- command
     	do
     		lvl := level.to_integer
 			-- perform some update on the model state
-			model.new_game (lvl, False)
+			model.new_game (lvl)
 			etf_cmd_container.on_change.notify ([Current])
     	end
 

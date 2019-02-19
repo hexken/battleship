@@ -482,10 +482,10 @@
   B  _  _  _  _
   C  _  _  _  _
   D  _  _  _  _
-  Current Game: 3
+  Current Game: 1
   Shots: 0/8
   Bombs: 0/2
-  Score: 0/3 (Total: 18/21)
+  Score: 0/3 (Total: 0/3)
   Ships: 0/2
     2x1: Not Sunk
     1x1: Not Sunk

@@ -22,19 +22,25 @@ feature{GAME_DATA} -- contructor
 	make do end
 
 
-feature -- commands
+feature{GAME, GAME_DATA} -- commands
 
 	fire
 		do
 			ammo := ammo - 1
+		ensure
+			ammo >= 0
 		end
 
 	bomb
 		do
 			bombs := bombs - 1
+		ensure
+			bombs >= 0
 		end
 
-	increment_score (x: INTEGER)
+	increment_score_by (x: INTEGER)
+		require
+			x > 0
 		do
 			score := score + x
 		ensure
@@ -46,15 +52,31 @@ feature -- commands
 		do
 			ships_sunk := ships_sunk + 1
 		ensure
-			ships_sunk = old ships_sunk + 1
+			inc: ships_sunk = old ships_sunk + 1
+			nonneg: ships_sunk >= 0
+		end
+
+	increment_ships_sunk_by (x: INTEGER)
+		require
+			x >  0
+		do
+			ships_sunk := ships_sunk + x
+		ensure
+			inc: ships_sunk = old ships_sunk + x
+			nonneg: ships_sunk >= 0
 		end
 
 	reset (inammo, inbombs: INTEGER)
+		require
+			inammo >= 0 and inbombs >= 0
 		do
 			ammo := inammo
 			bombs := inbombs
 			ships_sunk := 0
 			score := 0
+		ensure
+			ammo = inammo and bombs = inbombs and ships_sunk = 0
+			and score = 0
 		end
 
 	set_ammo (inammo: INTEGER)
@@ -81,14 +103,18 @@ feature -- queries
 	out_of_ammo: BOOLEAN
 		do
 			Result := ammo = 0
+		ensure
+			Result = (ammo = 0)
 		end
 
 	out_of_bombs: BOOLEAN
 		do
 			Result := bombs = 0
+		ensure
+			Result = (bombs = 0)
 		end
 
 invariant
-	bombs >= 0 and ammo >= 0 and ships_sunk >= 0
+	bombs >= 0 and ammo >= 0 and ships_sunk >= 0 and score >= 0
 
 end

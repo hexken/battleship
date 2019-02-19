@@ -13,10 +13,10 @@ inherit
 			out
 		end
 
-create
+create{MAP_TILE}
 	make_hit, make_miss, make_blank, make_horizontal, make_vertical
 
-feature -- constants
+feature{MAP_TILE} -- constants
 
 	make_hit
 		do

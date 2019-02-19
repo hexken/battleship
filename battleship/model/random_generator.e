@@ -12,7 +12,7 @@ note
 class
 	RANDOM_GENERATOR
 
-create
+create{GAME_DATA}
 	make_debug, make_random
 
 feature{NONE} -- atributues
@@ -21,7 +21,7 @@ feature{NONE} -- atributues
 			-- used to generate random numbers
 
 
-feature{NONE} -- creation
+feature{GAME_DATA} -- creation
 
 	make_debug
 			-- returns random variables for debug purposes
@@ -48,7 +48,7 @@ feature{NONE} -- creation
 			create r_seed.set_seed (seed)
 		end
 
-feature -- queries
+feature{GAME_DATA} -- queries
 
 	column: INTEGER
 			-- returns a random variable used to generate column coordinates
@@ -68,7 +68,7 @@ feature -- queries
 			result := d_seed.item
 		end
 
-feature -- commands
+feature{GAME_DATA} -- commands
 
 	forth
 			-- sets the row, column and direction variables forward

@@ -16,7 +16,7 @@ inherit
 create {GAME_DATA}
 	make
 
-feature -- attributes
+feature{GAME, GAME_DATA} -- attributes
 
 	board: ARRAY2[MAP_TILE]
 	rows: INTEGER
@@ -54,9 +54,7 @@ feature{GAME_DATA} -- constructor
 			rows = inrows and cols = incols
 		end
 
-feature{NONE} -- utilities
-
-feature -- queries
+feature{GAME} -- queries
 
 	out: STRING
 			-- Return string representation of current game.
