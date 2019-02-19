@@ -21,7 +21,6 @@ feature{NONE} -- model attributes
 	d: GAME_DATA
 
 	game_in_progress: BOOLEAN
-	first_game_started: BOOLEAN
 	debug_mode: BOOLEAN
 
 	game_num: INTEGER
@@ -39,8 +38,8 @@ feature -- constructor
 			data_access: GAME_DATA_ACCESS
 		do
 			d := data_access.data
-			create error_str.make_from_string  (d.ok_str)
-			create status_str.make_from_string  (d.s1)
+			create error_str.make_from_string (d.ok_str)
+			create status_str.make_from_string (d.s1)
 		end
 
 feature -- model oprations
@@ -149,7 +148,7 @@ feature -- model oprations
 
 	reset
 		do
-
+			make
 		end
 
 feature{NONE} -- private helpers
@@ -215,8 +214,6 @@ feature{NONE} -- private helpers
 					game_num := game_num + 1
 				end
 				game_in_progress := True
-				first_game_started := True
-
 				error_str.make_from_string  (d.ok_str)
 				status_str.make_from_string  (d.s2)
 			end
@@ -236,7 +233,7 @@ feature -- queries
 			Result.append (error_str)
 			Result.append (" -> " + status_str)
 
-			if first_game_started then
+			if game_num > 0 then
 				Result.append (d.map.out)
 				Result.append ("%N  Current Game")
 				if debug_mode then
