@@ -28,7 +28,7 @@ is_expected = False
 oracle = "../oracle.exe"
 
 # Specify the path of the executable built from your project.
-executable = "../bship.exe"
+executable = "../EIFGENs/battleship/W_code/battleship"
 # The above is an OSX executable
 # Linux executable for students shaler be called: oracle.exe
 
